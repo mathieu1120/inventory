@@ -60551,7 +60551,7 @@ var InfiniteScroll = function (_PureComponent) {
                 return { sentinelIdx: sentinelIdx };
             });
         }, _this.onScroll = function (entries, observer) {
-            if (entries[0].isIntersecting && !_this.state.isFetching && _this.props.shouldFetch()) {
+            if ((entries[0].isIntersecting || entries[0].intersectionRatio > 0) && !_this.state.isFetching && _this.props.shouldFetch()) {
                 _this.setState({
                     isFetching: true
                 }, function () {

@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/inventory', 'InventoryController@index');
+Route::get('/', 'InventoryController@index');
 
 Route::get('api/inventory/items', 'InventoryController@items');
 

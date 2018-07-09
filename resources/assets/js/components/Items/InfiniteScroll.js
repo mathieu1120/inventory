@@ -127,7 +127,7 @@ export default class InfiniteScroll extends PureComponent {
     }
 
     onScroll = (entries, observer) => {
-        if (entries[0].isIntersecting && !this.state.isFetching && this.props.shouldFetch()) {
+        if ((entries[0].isIntersecting || entries[0].intersectionRatio > 0) && !this.state.isFetching && this.props.shouldFetch()) {
             this.setState({
                 isFetching: true
             }, () => {
