@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
+import IntersectionObserver from 'intersection-observer-polyfill';
 
 /**
  * This component uses the `IntersectionObserver` API:
