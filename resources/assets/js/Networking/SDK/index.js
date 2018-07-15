@@ -189,10 +189,12 @@ class SDK {
      */
     composeMiddlewareStack(middlewares, end) {
         if (middlewares.length === 0) {
-            return request => end(request)
+            return request => {
+                return end(request);
+            }
         }
-        const current = middlewares[0]
-        const next = this.composeMiddlewareStack(middlewares.slice(1), end)
+        const current = middlewares[0];
+        const next = this.composeMiddlewareStack(middlewares.slice(1), end);
         return request => current(request, next)
     }
 

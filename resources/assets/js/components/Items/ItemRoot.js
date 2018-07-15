@@ -11,6 +11,7 @@ import {
 } from '../../selectors/inventory/items';
 
 import {getItems} from '../../actions/inventory/items';
+import {getEtsyItem} from '../../actions/inventory/etsy';
 
 export class ItemRoot extends Component {
     static propTypes = {
@@ -18,7 +19,8 @@ export class ItemRoot extends Component {
         getItems: PropTypes.func.isRequired,
         totalItems: PropTypes.number.isRequired,
         loading: PropTypes.bool.isRequired,
-        nextOffset: PropTypes.number.isRequired
+        nextOffset: PropTypes.number.isRequired,
+        getEtsyItem: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -33,9 +35,11 @@ export class ItemRoot extends Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
+        console.log('new props');
         this.setState({
             items: nextProps.items
         });
+
     }
 
     componentDidMount = () => {
@@ -46,6 +50,9 @@ export class ItemRoot extends Component {
         this.setState({
             selectedItemIndex: index
         });
+        if (!!this.state.items[index].etsy_listing_id) {
+            this.props.getEtsyItem(this.state.items[index].etsy_listing_id);
+        }
     }
 
     getMoreItems = () => {
@@ -160,6 +167,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getItems: (search, offset) => {
             return dispatch(getItems(search, offset));
+        },
+        getEtsyItem: (id) => {
+            return dispatch(getEtsyItem(id));
         }
     };
 }

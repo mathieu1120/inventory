@@ -12,7 +12,9 @@ class ItemForm extends Component {
         handleSubmit: PropTypes.func.isRequired,
         pristine: PropTypes.bool.isRequired,
         submitting: PropTypes.bool.isRequired,
-        deleteNewItem: PropTypes.func.isRequired
+        deleteNewItem: PropTypes.func.isRequired,
+        selectedItem: PropTypes.object.isRequired,
+        change: PropTypes.func.isRequired
     }
 
     render() {
@@ -23,7 +25,11 @@ class ItemForm extends Component {
                 <Field type="hidden" component="input" name="id"/>
                 <div className="col-md-9">
                     <ItemFormError />
-                    <ItemFormFields form={this.props.form} />
+                    <ItemFormFields
+                        form={this.props.form}
+                        selectedItem={this.props.selectedItem}
+                        change={this.props.change}
+                    />
                 </div>
                 <div className="col-md-3">
                     <ItemFormCTA

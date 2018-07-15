@@ -18,7 +18,8 @@ class Item extends Model
         'shipping_cost',
         'shipping_price',
         'shipping_at',
-        'status'
+        'status',
+        'etsy_listing_id'
     ];
 
     public $editableField = [
@@ -32,7 +33,8 @@ class Item extends Model
         'sold_price',
         'shipping_cost',
         'shipping_price',
-        'shipping_at'
+        'shipping_at',
+        'etsy_listing_id'
     ];
 
     public function editableFieldsArray() {

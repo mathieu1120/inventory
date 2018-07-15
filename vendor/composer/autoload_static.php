@@ -25,8 +25,11 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '8ea14d6df73c6a682673f716c3eb4d38' => __DIR__ . '/..' . '/aimeos/aimeos-laravel/src/helpers.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -97,6 +100,12 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         array (
             'Illuminate\\' => 11,
         ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
+        ),
         'F' => 
         array (
             'Fideloper\\Proxy\\' => 16,
@@ -104,6 +113,7 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         ),
         'E' => 
         array (
+            'Etsy\\' => 5,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -278,6 +288,18 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
         'Fideloper\\Proxy\\' => 
         array (
             0 => __DIR__ . '/..' . '/fideloper/proxy/src',
@@ -285,6 +307,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
+        'Etsy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
@@ -392,6 +418,13 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
     );
 
     public static $prefixesPsr0 = array (
+        'U' => 
+        array (
+            'Unirest' => 
+            array (
+                0 => __DIR__ . '/..' . '/mashape/unirest-php/src',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -401,6 +434,21 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
             'Parsedown' => 
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown',
+            ),
+        ),
+        'O' => 
+        array (
+            'OAuth_io' => 
+            array (
+                0 => __DIR__ . '/..' . '/oauth-io/oauth/src',
+            ),
+            'OAuth\\Unit' => 
+            array (
+                0 => __DIR__ . '/..' . '/lusitanian/oauth/tests',
+            ),
+            'OAuth' => 
+            array (
+                0 => __DIR__ . '/..' . '/lusitanian/oauth/src',
             ),
         ),
         'M' => 
@@ -438,6 +486,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         ),
         'A' => 
         array (
+            'Artdarek\\OAuth' => 
+            array (
+                0 => __DIR__ . '/..' . '/oriceon/oauth-5-laravel/src',
+            ),
             'Aimeos\\Shop\\' => 
             array (
                 0 => __DIR__ . '/..' . '/aimeos/aimeos-laravel/src',
@@ -2184,7 +2236,6 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\InventoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/InventoryController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -2201,6 +2252,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
+        'Artdarek\\OAuth\\Facade\\OAuth' => __DIR__ . '/..' . '/oriceon/oauth-5-laravel/src/Artdarek/OAuth/Facade/OAuth.php',
+        'Artdarek\\OAuth\\OAuth' => __DIR__ . '/..' . '/oriceon/oauth-5-laravel/src/Artdarek/OAuth/OAuth.php',
+        'Artdarek\\OAuth\\OAuthServiceProvider' => __DIR__ . '/..' . '/oriceon/oauth-5-laravel/src/Artdarek/OAuth/OAuthServiceProvider.php',
+        'Artdarek\\OAuth\\TokenStorage' => __DIR__ . '/..' . '/oriceon/oauth-5-laravel/src/Artdarek/OAuth/TokenStorage.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
@@ -2765,6 +2820,13 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/Warning.php',
         'Error' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/Error.php',
+        'Etsy\\EtsyApi' => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy/EtsyApi.php',
+        'Etsy\\EtsyClient' => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy/EtsyClient.php',
+        'Etsy\\EtsyRequestException' => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy/EtsyClient.php',
+        'Etsy\\EtsyResponseException' => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy/EtsyClient.php',
+        'Etsy\\Mocks\\EtsyClientMock' => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy/Mocks/EtsyClientMock.php',
+        'Etsy\\OAuthHelper' => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy/OAuthHelper.php',
+        'Etsy\\RequestValidator' => __DIR__ . '/..' . '/inakiabt/etsy-php/src/Etsy/RequestValidator.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
@@ -3195,6 +3257,74 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
+        'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
+        'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
+        'GuzzleHttp\\Cookie\\CookieJarInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJarInterface.php',
+        'GuzzleHttp\\Cookie\\FileCookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/FileCookieJar.php',
+        'GuzzleHttp\\Cookie\\SessionCookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/SessionCookieJar.php',
+        'GuzzleHttp\\Cookie\\SetCookie' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/SetCookie.php',
+        'GuzzleHttp\\Exception\\BadResponseException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/BadResponseException.php',
+        'GuzzleHttp\\Exception\\ClientException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/ClientException.php',
+        'GuzzleHttp\\Exception\\ConnectException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/ConnectException.php',
+        'GuzzleHttp\\Exception\\GuzzleException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/GuzzleException.php',
+        'GuzzleHttp\\Exception\\RequestException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/RequestException.php',
+        'GuzzleHttp\\Exception\\SeekException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/SeekException.php',
+        'GuzzleHttp\\Exception\\ServerException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/ServerException.php',
+        'GuzzleHttp\\Exception\\TooManyRedirectsException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/TooManyRedirectsException.php',
+        'GuzzleHttp\\Exception\\TransferException' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Exception/TransferException.php',
+        'GuzzleHttp\\HandlerStack' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/HandlerStack.php',
+        'GuzzleHttp\\Handler\\CurlFactory' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlFactory.php',
+        'GuzzleHttp\\Handler\\CurlFactoryInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlFactoryInterface.php',
+        'GuzzleHttp\\Handler\\CurlHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlHandler.php',
+        'GuzzleHttp\\Handler\\CurlMultiHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/CurlMultiHandler.php',
+        'GuzzleHttp\\Handler\\EasyHandle' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/EasyHandle.php',
+        'GuzzleHttp\\Handler\\MockHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/MockHandler.php',
+        'GuzzleHttp\\Handler\\Proxy' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/Proxy.php',
+        'GuzzleHttp\\Handler\\StreamHandler' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Handler/StreamHandler.php',
+        'GuzzleHttp\\MessageFormatter' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/MessageFormatter.php',
+        'GuzzleHttp\\Middleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Middleware.php',
+        'GuzzleHttp\\Pool' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Pool.php',
+        'GuzzleHttp\\PrepareBodyMiddleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php',
+        'GuzzleHttp\\Promise\\AggregateException' => __DIR__ . '/..' . '/guzzlehttp/promises/src/AggregateException.php',
+        'GuzzleHttp\\Promise\\CancellationException' => __DIR__ . '/..' . '/guzzlehttp/promises/src/CancellationException.php',
+        'GuzzleHttp\\Promise\\Coroutine' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Coroutine.php',
+        'GuzzleHttp\\Promise\\EachPromise' => __DIR__ . '/..' . '/guzzlehttp/promises/src/EachPromise.php',
+        'GuzzleHttp\\Promise\\FulfilledPromise' => __DIR__ . '/..' . '/guzzlehttp/promises/src/FulfilledPromise.php',
+        'GuzzleHttp\\Promise\\Promise' => __DIR__ . '/..' . '/guzzlehttp/promises/src/Promise.php',
+        'GuzzleHttp\\Promise\\PromiseInterface' => __DIR__ . '/..' . '/guzzlehttp/promises/src/PromiseInterface.php',
+        'GuzzleHttp\\Promise\\PromisorInterface' => __DIR__ . '/..' . '/guzzlehttp/promises/src/PromisorInterface.php',
+        'GuzzleHttp\\Promise\\RejectedPromise' => __DIR__ . '/..' . '/guzzlehttp/promises/src/RejectedPromise.php',
+        'GuzzleHttp\\Promise\\RejectionException' => __DIR__ . '/..' . '/guzzlehttp/promises/src/RejectionException.php',
+        'GuzzleHttp\\Promise\\TaskQueue' => __DIR__ . '/..' . '/guzzlehttp/promises/src/TaskQueue.php',
+        'GuzzleHttp\\Promise\\TaskQueueInterface' => __DIR__ . '/..' . '/guzzlehttp/promises/src/TaskQueueInterface.php',
+        'GuzzleHttp\\Psr7\\AppendStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/AppendStream.php',
+        'GuzzleHttp\\Psr7\\BufferStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/BufferStream.php',
+        'GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/CachingStream.php',
+        'GuzzleHttp\\Psr7\\DroppingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/DroppingStream.php',
+        'GuzzleHttp\\Psr7\\FnStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/FnStream.php',
+        'GuzzleHttp\\Psr7\\InflateStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/InflateStream.php',
+        'GuzzleHttp\\Psr7\\LazyOpenStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LazyOpenStream.php',
+        'GuzzleHttp\\Psr7\\LimitStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LimitStream.php',
+        'GuzzleHttp\\Psr7\\MessageTrait' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MessageTrait.php',
+        'GuzzleHttp\\Psr7\\MultipartStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MultipartStream.php',
+        'GuzzleHttp\\Psr7\\NoSeekStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/NoSeekStream.php',
+        'GuzzleHttp\\Psr7\\PumpStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/PumpStream.php',
+        'GuzzleHttp\\Psr7\\Request' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Request.php',
+        'GuzzleHttp\\Psr7\\Response' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Response.php',
+        'GuzzleHttp\\Psr7\\ServerRequest' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/ServerRequest.php',
+        'GuzzleHttp\\Psr7\\Stream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Stream.php',
+        'GuzzleHttp\\Psr7\\StreamDecoratorTrait' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/StreamDecoratorTrait.php',
+        'GuzzleHttp\\Psr7\\StreamWrapper' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/StreamWrapper.php',
+        'GuzzleHttp\\Psr7\\UploadedFile' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UploadedFile.php',
+        'GuzzleHttp\\Psr7\\Uri' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Uri.php',
+        'GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriNormalizer.php',
+        'GuzzleHttp\\Psr7\\UriResolver' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriResolver.php',
+        'GuzzleHttp\\RedirectMiddleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RedirectMiddleware.php',
+        'GuzzleHttp\\RequestOptions' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RequestOptions.php',
+        'GuzzleHttp\\RetryMiddleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RetryMiddleware.php',
+        'GuzzleHttp\\TransferStats' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/TransferStats.php',
+        'GuzzleHttp\\UriTemplate' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/UriTemplate.php',
         'Hamcrest\\Arrays\\IsArray' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
         'Hamcrest\\Arrays\\IsArrayContaining' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
         'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',
@@ -4242,6 +4372,108 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'OAuth\\Common\\AutoLoader' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/AutoLoader.php',
+        'OAuth\\Common\\Consumer\\Credentials' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Consumer/Credentials.php',
+        'OAuth\\Common\\Consumer\\CredentialsInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Consumer/CredentialsInterface.php',
+        'OAuth\\Common\\Exception\\Exception' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Exception/Exception.php',
+        'OAuth\\Common\\Http\\Client\\AbstractClient' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Client/AbstractClient.php',
+        'OAuth\\Common\\Http\\Client\\ClientInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Client/ClientInterface.php',
+        'OAuth\\Common\\Http\\Client\\CurlClient' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Client/CurlClient.php',
+        'OAuth\\Common\\Http\\Client\\StreamClient' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Client/StreamClient.php',
+        'OAuth\\Common\\Http\\Exception\\TokenResponseException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Exception/TokenResponseException.php',
+        'OAuth\\Common\\Http\\Uri\\Uri' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Uri/Uri.php',
+        'OAuth\\Common\\Http\\Uri\\UriFactory' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Uri/UriFactory.php',
+        'OAuth\\Common\\Http\\Uri\\UriFactoryInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Uri/UriFactoryInterface.php',
+        'OAuth\\Common\\Http\\Uri\\UriInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Http/Uri/UriInterface.php',
+        'OAuth\\Common\\Service\\AbstractService' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Service/AbstractService.php',
+        'OAuth\\Common\\Service\\ServiceInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Service/ServiceInterface.php',
+        'OAuth\\Common\\Storage\\Exception\\AuthorizationStateNotFoundException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/Exception/AuthorizationStateNotFoundException.php',
+        'OAuth\\Common\\Storage\\Exception\\StorageException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/Exception/StorageException.php',
+        'OAuth\\Common\\Storage\\Exception\\TokenNotFoundException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/Exception/TokenNotFoundException.php',
+        'OAuth\\Common\\Storage\\Memory' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/Memory.php',
+        'OAuth\\Common\\Storage\\Redis' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/Redis.php',
+        'OAuth\\Common\\Storage\\Session' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/Session.php',
+        'OAuth\\Common\\Storage\\SymfonySession' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/SymfonySession.php',
+        'OAuth\\Common\\Storage\\TokenStorageInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Storage/TokenStorageInterface.php',
+        'OAuth\\Common\\Token\\AbstractToken' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Token/AbstractToken.php',
+        'OAuth\\Common\\Token\\Exception\\ExpiredTokenException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Token/Exception/ExpiredTokenException.php',
+        'OAuth\\Common\\Token\\TokenInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/Common/Token/TokenInterface.php',
+        'OAuth\\OAuth1\\Service\\AbstractService' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/AbstractService.php',
+        'OAuth\\OAuth1\\Service\\BitBucket' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/BitBucket.php',
+        'OAuth\\OAuth1\\Service\\Etsy' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/Etsy.php',
+        'OAuth\\OAuth1\\Service\\FitBit' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/FitBit.php',
+        'OAuth\\OAuth1\\Service\\FiveHundredPx' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/FiveHundredPx.php',
+        'OAuth\\OAuth1\\Service\\Flickr' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/Flickr.php',
+        'OAuth\\OAuth1\\Service\\QuickBooks' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/QuickBooks.php',
+        'OAuth\\OAuth1\\Service\\Redmine' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/Redmine.php',
+        'OAuth\\OAuth1\\Service\\ScoopIt' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/ScoopIt.php',
+        'OAuth\\OAuth1\\Service\\ServiceInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/ServiceInterface.php',
+        'OAuth\\OAuth1\\Service\\Tumblr' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/Tumblr.php',
+        'OAuth\\OAuth1\\Service\\Twitter' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/Twitter.php',
+        'OAuth\\OAuth1\\Service\\Xing' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/Xing.php',
+        'OAuth\\OAuth1\\Service\\Yahoo' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Service/Yahoo.php',
+        'OAuth\\OAuth1\\Signature\\Exception\\UnsupportedHashAlgorithmException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Signature/Exception/UnsupportedHashAlgorithmException.php',
+        'OAuth\\OAuth1\\Signature\\Signature' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Signature/Signature.php',
+        'OAuth\\OAuth1\\Signature\\SignatureInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Signature/SignatureInterface.php',
+        'OAuth\\OAuth1\\Token\\StdOAuth1Token' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Token/StdOAuth1Token.php',
+        'OAuth\\OAuth1\\Token\\TokenInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth1/Token/TokenInterface.php',
+        'OAuth\\OAuth2\\Service\\AbstractService' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/AbstractService.php',
+        'OAuth\\OAuth2\\Service\\Amazon' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Amazon.php',
+        'OAuth\\OAuth2\\Service\\BattleNet' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/BattleNet.php',
+        'OAuth\\OAuth2\\Service\\Bitly' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Bitly.php',
+        'OAuth\\OAuth2\\Service\\Bitrix24' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Bitrix24.php',
+        'OAuth\\OAuth2\\Service\\Box' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Box.php',
+        'OAuth\\OAuth2\\Service\\Buffer' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Buffer.php',
+        'OAuth\\OAuth2\\Service\\Dailymotion' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Dailymotion.php',
+        'OAuth\\OAuth2\\Service\\Deezer' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Deezer.php',
+        'OAuth\\OAuth2\\Service\\Delicious' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Delicious.php',
+        'OAuth\\OAuth2\\Service\\DeviantArt' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/DeviantArt.php',
+        'OAuth\\OAuth2\\Service\\Dropbox' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Dropbox.php',
+        'OAuth\\OAuth2\\Service\\EveOnline' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/EveOnline.php',
+        'OAuth\\OAuth2\\Service\\Exception\\InvalidAccessTypeException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Exception/InvalidAccessTypeException.php',
+        'OAuth\\OAuth2\\Service\\Exception\\InvalidAuthorizationStateException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Exception/InvalidAuthorizationStateException.php',
+        'OAuth\\OAuth2\\Service\\Exception\\InvalidScopeException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Exception/InvalidScopeException.php',
+        'OAuth\\OAuth2\\Service\\Exception\\MissingRefreshTokenException' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Exception/MissingRefreshTokenException.php',
+        'OAuth\\OAuth2\\Service\\Facebook' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Facebook.php',
+        'OAuth\\OAuth2\\Service\\Foursquare' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Foursquare.php',
+        'OAuth\\OAuth2\\Service\\GitHub' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/GitHub.php',
+        'OAuth\\OAuth2\\Service\\Google' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Google.php',
+        'OAuth\\OAuth2\\Service\\Harvest' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Harvest.php',
+        'OAuth\\OAuth2\\Service\\Heroku' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Heroku.php',
+        'OAuth\\OAuth2\\Service\\Hubic' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Hubic.php',
+        'OAuth\\OAuth2\\Service\\Instagram' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Instagram.php',
+        'OAuth\\OAuth2\\Service\\JawboneUP' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/JawboneUP.php',
+        'OAuth\\OAuth2\\Service\\Linkedin' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Linkedin.php',
+        'OAuth\\OAuth2\\Service\\Mailchimp' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Mailchimp.php',
+        'OAuth\\OAuth2\\Service\\Microsoft' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Microsoft.php',
+        'OAuth\\OAuth2\\Service\\Mondo' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Mondo.php',
+        'OAuth\\OAuth2\\Service\\Nest' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Nest.php',
+        'OAuth\\OAuth2\\Service\\Netatmo' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Netatmo.php',
+        'OAuth\\OAuth2\\Service\\ParrotFlowerPower' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/ParrotFlowerPower.php',
+        'OAuth\\OAuth2\\Service\\Paypal' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Paypal.php',
+        'OAuth\\OAuth2\\Service\\Pinterest' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Pinterest.php',
+        'OAuth\\OAuth2\\Service\\Pocket' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Pocket.php',
+        'OAuth\\OAuth2\\Service\\Reddit' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Reddit.php',
+        'OAuth\\OAuth2\\Service\\RunKeeper' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/RunKeeper.php',
+        'OAuth\\OAuth2\\Service\\Salesforce' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Salesforce.php',
+        'OAuth\\OAuth2\\Service\\ServiceInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/ServiceInterface.php',
+        'OAuth\\OAuth2\\Service\\SoundCloud' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/SoundCloud.php',
+        'OAuth\\OAuth2\\Service\\Spotify' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Spotify.php',
+        'OAuth\\OAuth2\\Service\\Strava' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Strava.php',
+        'OAuth\\OAuth2\\Service\\Ustream' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Ustream.php',
+        'OAuth\\OAuth2\\Service\\Vimeo' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Vimeo.php',
+        'OAuth\\OAuth2\\Service\\Vkontakte' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Vkontakte.php',
+        'OAuth\\OAuth2\\Service\\Yahoo' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Yahoo.php',
+        'OAuth\\OAuth2\\Service\\Yammer' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Service/Yammer.php',
+        'OAuth\\OAuth2\\Token\\StdOAuth2Token' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Token/StdOAuth2Token.php',
+        'OAuth\\OAuth2\\Token\\TokenInterface' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/OAuth2/Token/TokenInterface.php',
+        'OAuth\\ServiceFactory' => __DIR__ . '/..' . '/lusitanian/oauth/src/OAuth/ServiceFactory.php',
+        'OAuth_io\\HttpWrapper' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/HttpWrapper.php',
+        'OAuth_io\\Injector' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/Injector.php',
+        'OAuth_io\\NotAuthenticatedException' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/NotAuthenticatedException.php',
+        'OAuth_io\\NotInitializedException' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/NotInitializedException.php',
+        'OAuth_io\\OAuth' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/OAuth.php',
+        'OAuth_io\\RequestObject' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/RequestObject.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -5872,6 +6104,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
+        'Unirest\\File' => __DIR__ . '/..' . '/mashape/unirest-php/src/Unirest/File.php',
+        'Unirest\\Method' => __DIR__ . '/..' . '/mashape/unirest-php/src/Unirest/Method.php',
+        'Unirest\\Request' => __DIR__ . '/..' . '/mashape/unirest-php/src/Unirest/Request.php',
+        'Unirest\\Response' => __DIR__ . '/..' . '/mashape/unirest-php/src/Unirest/Response.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',

@@ -1,4 +1,5 @@
 import Items from './Items'
+import Etsy from './Etsy'
 
 import AbstractResource from '../AbstractResource'
 
@@ -7,6 +8,7 @@ export default class Inventory extends AbstractResource {
         super(sdk);
 
         this.items = new Items(sdk);
+        this.etsy = new Etsy(sdk);
     }
 
     /**

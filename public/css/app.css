@@ -8449,6 +8449,8 @@ button.close {
 .list-group {
   height: 600px;
   overflow: scroll;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .upload-image input {
@@ -8505,5 +8507,9 @@ button.close {
 .add_new_item_wrapper .badge {
   background-color: #2ab27b;
   cursor: pointer;
+}
+
+.etsy-results.list-group {
+  height: auto;
 }
 

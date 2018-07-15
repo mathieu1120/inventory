@@ -15,8 +15,13 @@
         "aimeos/aimeos-laravel": "~2017.10",
         "doctrine/dbal": "2.6.3",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "^6.3",
+        "inakiabt/etsy-php": "^0.11.0",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "lusitanian/oauth": "^0.8.11",
+        "oauth-io/oauth": "^0.3.2",
+        "oriceon/oauth-5-laravel": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

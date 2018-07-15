@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InventoryItemEditRequest;
 use App\Item;
+use Etsy\EtsyApi;
+use Etsy\EtsyClient;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -55,7 +57,8 @@ class InventoryController extends Controller
                 'sold_price',
                 'shipping_cost',
                 'shipping_price',
-                'shipping_at'])
+                'shipping_at',
+                'etsy_listing_id'])
             ->orderBy('name')
             ->skip($offset)
             ->take(50)
@@ -127,6 +130,57 @@ class InventoryController extends Controller
         $response->headers->set('X-ITEMS-TOTAL', Item::where('status', 1)->count());
         return $response->setData([
             'soldItemId' => $id
+        ]);
+    }
+
+    public function getEtsyItems(Request $request, JsonResponse $response) {
+        $consumerKey = config('auth_etsy.consumer_key');
+        $consumerSecret = config('auth_etsy.consumer_secret');
+        $accessToken = config('auth_etsy.access_token');
+        $accessTokenSecret = config('auth_etsy.access_token_secret');
+
+        $client = new EtsyClient($consumerKey, $consumerSecret);
+        $client->authorize($accessToken, $accessTokenSecret);
+
+        $api = new EtsyApi($client);
+
+        $keyword = $request->query('keyword', '');
+        $minPrice = $request->query('min_price', 0.00);
+        $maxPrice = $request->query('max_price', 1000.00);
+
+        return $response->setData([
+            'searchResults' => $api->findAllShopListingsActive([
+                'params' => [
+                    'shop_id' => 5605001,
+                ],
+                'data' => [
+                    'limit' => 1000,
+                    'keywords' => $keyword,
+                    'min_price' => $minPrice,
+                    'max_price' => $maxPrice,
+                    'include_private' => true
+                ]
+            ])
+        ]);
+    }
+
+    public function getEtsyItem(Request $request, JsonResponse $response, $listingId) {
+        $consumerKey = config('auth_etsy.consumer_key');
+        $consumerSecret = config('auth_etsy.consumer_secret');
+        $accessToken = config('auth_etsy.access_token');
+        $accessTokenSecret = config('auth_etsy.access_token_secret');
+
+        $client = new EtsyClient($consumerKey, $consumerSecret);
+        $client->authorize($accessToken, $accessTokenSecret);
+
+        $api = new EtsyApi($client);
+
+        return $response->setData([
+            'searchResults' => $api->getListing([
+                'params' => [
+                    'listing_id' => $listingId,
+                ]
+            ])
         ]);
     }
 }

@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ItemImageInput from './ItemImageInput';
+import ItemEtsySearch from './ItemEtsySearch';
 import {Field} from 'redux-form';
 
 export default class ItemFormFields extends Component {
 
     static propTypes = {
-        form: PropTypes.string.isRequired
+        form: PropTypes.string.isRequired,
+        selectedItem: PropTypes.object.isRequired,
+        change: PropTypes.func.isRequired
+    }
+
+    etsyItemChangeId = (id) => {
+        this.props.change('etsy_listing_id', id);
     }
 
     render() {
@@ -122,6 +129,24 @@ export default class ItemFormFields extends Component {
                             />
                         </div>
                     </div>
+                    <hr/>
+                    <div className="form-group">
+                        <label htmlFor="inputEtsyListingId" className="col-sm-3 control-label">Etsy Item ID</label>
+                        <div className="col-sm-9">
+                            <Field
+                                className="form-control"
+                                type="number"
+                                id="inputEtsyListingId"
+                                name="etsy_listing_id"
+                                placeholder="Etsy Listing Id"
+                                component="input"
+                                disabled={true}
+                            />
+                        </div>
+                    </div>
+                    <ItemEtsySearch
+                        selectedItem={this.props.selectedItem}
+                        change={this.etsyItemChangeId}/>
                 </div>
                 <div className="col-md-4">
                     <Field

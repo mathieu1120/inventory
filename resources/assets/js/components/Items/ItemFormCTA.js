@@ -112,11 +112,6 @@ class ItemFormCTA extends Component {
                         )}>
                         Reset
                     </button>
-                    <button type="button" className="list-group-item">Preview</button>
-                    <br/>
-                    <button type="button" className="list-group-item list-group-item-success">Publish</button>
-                    <br/>
-                    <button type="button" className="list-group-item list-group-item-warning">UnPublish</button>
                     <br/>
                     <button
                         type="button"

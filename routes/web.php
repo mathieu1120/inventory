@@ -17,14 +17,15 @@ Route::domain('www.shoprachaels.com')->group(function () {
     Route::get('/', function () {
         return redirect('list');
     });
-
-    Route::get('/home', 'HomeController@index')->name('home');
 });
 
 Route::domain('inventory.shoprachaels.com')->group(function () {
 
     Route::get('/', 'InventoryController@index');
     Route::get('/inventory', 'InventoryController@index');
+
+    Route::get('api/inventory/etsy-items', 'InventoryController@getEtsyItems');
+    Route::get('api/inventory/etsy-item/{listingId}', 'InventoryController@getEtsyItem');
 
     Route::get('api/inventory/items', 'InventoryController@items');
 
