@@ -60268,13 +60268,19 @@ var _ItemFormWrapper = __webpack_require__(339);
 
 var _ItemFormWrapper2 = _interopRequireDefault(_ItemFormWrapper);
 
+var _ItemEtsyFormWrapper = __webpack_require__(591);
+
+var _ItemEtsyFormWrapper2 = _interopRequireDefault(_ItemEtsyFormWrapper);
+
 var _reactRedux = __webpack_require__(10);
 
 var _items = __webpack_require__(109);
 
+var _etsy = __webpack_require__(567);
+
 var _items2 = __webpack_require__(27);
 
-var _etsy = __webpack_require__(70);
+var _etsy2 = __webpack_require__(70);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60292,8 +60298,11 @@ var ItemRoot = exports.ItemRoot = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (ItemRoot.__proto__ || Object.getPrototypeOf(ItemRoot)).call(this, props));
 
-        _this.componentWillReceiveProps = function (nextProps) {
-            console.log('new props');
+        _this.componentWillReceiveProps = function (nextProps, nextState) {
+            if (_this.state.items.length === 0 && nextProps.items.length > 0) {
+                _this.props.getEtsyItem(nextProps.items[_this.state.selectedItemIndex].etsy_listing_id);
+            }
+
             _this.setState({
                 items: nextProps.items
             });
@@ -60413,7 +60422,8 @@ var ItemRoot = exports.ItemRoot = function (_Component) {
                     this.state.items.length > 0 && _react2.default.createElement(_ItemFormWrapper2.default, {
                         selectedItem: selectedItem,
                         deleteNewItem: this.deleteNewItem
-                    })
+                    }),
+                    !!this.props.etsyItem.listing_id && _react2.default.createElement(_ItemEtsyFormWrapper2.default, { item: this.props.etsyItem })
                 ),
                 (this.state.items.length <= 0 && !this.state.search || this.props.loading) && _react2.default.createElement(
                     'div',
@@ -60439,7 +60449,8 @@ ItemRoot.propTypes = {
     totalItems: _propTypes2.default.number.isRequired,
     loading: _propTypes2.default.bool.isRequired,
     nextOffset: _propTypes2.default.number.isRequired,
-    getEtsyItem: _propTypes2.default.func.isRequired
+    getEtsyItem: _propTypes2.default.func.isRequired,
+    etsyItem: _propTypes2.default.object.isRequired
 };
 
 
@@ -60448,7 +60459,8 @@ var mapStateToProps = function mapStateToProps(state) {
         items: (0, _items.getItemsFromState)(state),
         totalItems: (0, _items.getTotalItemsFromState)(state),
         nextOffset: (0, _items.getNextOffsetItemsFromState)(state),
-        loading: (0, _items.getLoadingFromState)(state)
+        loading: (0, _items.getLoadingFromState)(state),
+        etsyItem: (0, _etsy.getEtsyItemFromState)(state)
     };
 };
 
@@ -60458,7 +60470,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
             return dispatch((0, _items2.getItems)(search, offset));
         },
         getEtsyItem: function getEtsyItem(id) {
-            return dispatch((0, _etsy.getEtsyItem)(id));
+            return dispatch((0, _etsy2.getEtsyItem)(id));
         }
     };
 };
@@ -75130,21 +75142,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ItemFormWrapper = function (_Component) {
-    _inherits(ItemFormWrapper, _Component);
+var ItemFormError = function (_Component) {
+    _inherits(ItemFormError, _Component);
 
-    function ItemFormWrapper() {
+    function ItemFormError() {
         var _ref;
 
         var _temp, _this, _ret;
 
-        _classCallCheck(this, ItemFormWrapper);
+        _classCallCheck(this, ItemFormError);
 
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ItemFormWrapper.__proto__ || Object.getPrototypeOf(ItemFormWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.renderError = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ItemFormError.__proto__ || Object.getPrototypeOf(ItemFormError)).call.apply(_ref, [this].concat(args))), _this), _this.renderError = function () {
             var errors = [];
             for (var key in _this.props.errors.errors) {
                 if (_this.props.errors.errors.hasOwnProperty(key)) {
@@ -75166,7 +75178,7 @@ var ItemFormWrapper = function (_Component) {
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(ItemFormWrapper, [{
+    _createClass(ItemFormError, [{
         key: 'render',
         value: function render() {
             return !jQuery.isEmptyObject(this.props.errors) && _react2.default.createElement(
@@ -75188,10 +75200,10 @@ var ItemFormWrapper = function (_Component) {
         }
     }]);
 
-    return ItemFormWrapper;
+    return ItemFormError;
 }(_react.Component);
 
-ItemFormWrapper.propTypes = {
+ItemFormError.propTypes = {
     errors: _propTypes2.default.object.isRequired
 };
 
@@ -75202,7 +75214,7 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(ItemFormWrapper);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(ItemFormError);
 
 /***/ }),
 /* 563 */
@@ -75913,8 +75925,13 @@ var getLoadingEtsySearchFromState = function getLoadingEtsySearchFromState(state
     return state.inventory.metaItems.loading_etsy_search;
 };
 
+var getEtsyItemFromState = function getEtsyItemFromState(state) {
+    return state.inventory.etsyItem;
+};
+
 exports.getEtsySearchResultsFromState = getEtsySearchResultsFromState;
 exports.getLoadingEtsySearchFromState = getLoadingEtsySearchFromState;
+exports.getEtsyItemFromState = getEtsyItemFromState;
 
 /***/ }),
 /* 568 */
@@ -76082,6 +76099,10 @@ var _etsySearch = __webpack_require__(576);
 
 var _etsySearch2 = _interopRequireDefault(_etsySearch);
 
+var _etsyItem = __webpack_require__(590);
+
+var _etsyItem2 = _interopRequireDefault(_etsyItem);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
@@ -76089,7 +76110,8 @@ exports.default = (0, _redux.combineReducers)({
     metaItems: _metaItems2.default,
     uploads: _uploads2.default,
     formErrors: _formErrors2.default,
-    etsySearch: _etsySearch2.default
+    etsySearch: _etsySearch2.default,
+    etsyItem: _etsyItem2.default
 });
 
 /***/ }),
@@ -76386,6 +76408,605 @@ exports.devToolsEnhancer = (
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = etsyItem;
+
+var _etsy = __webpack_require__(70);
+
+var etsyItemsState = {};
+
+function etsyItem() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : etsyItemsState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _etsy.ETSY_ACTION.GET_ITEM.SUCCESS:
+            return action.response.item.results[0];
+        default:
+            return state;
+    }
+    return state;
+}
+
+/***/ }),
+/* 591 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _ItemEtsyForm = __webpack_require__(592);
+
+var _ItemEtsyForm2 = _interopRequireDefault(_ItemEtsyForm);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ItemEtsyFormWrapper = function (_Component) {
+    _inherits(ItemEtsyFormWrapper, _Component);
+
+    function ItemEtsyFormWrapper() {
+        _classCallCheck(this, ItemEtsyFormWrapper);
+
+        return _possibleConstructorReturn(this, (ItemEtsyFormWrapper.__proto__ || Object.getPrototypeOf(ItemEtsyFormWrapper)).apply(this, arguments));
+    }
+
+    _createClass(ItemEtsyFormWrapper, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(_ItemEtsyForm2.default, {
+                item: this.props.item,
+                initialValues: _extends({}, this.props.item),
+                form: 'etsyItem'
+            });
+        }
+    }]);
+
+    return ItemEtsyFormWrapper;
+}(_react.Component);
+
+ItemEtsyFormWrapper.propTypes = {
+    item: _propTypes2.default.object.isRequired
+};
+exports.default = ItemEtsyFormWrapper;
+
+/***/ }),
+/* 592 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _ItemEtsyFormCTA = __webpack_require__(593);
+
+var _ItemEtsyFormCTA2 = _interopRequireDefault(_ItemEtsyFormCTA);
+
+var _reduxForm = __webpack_require__(95);
+
+var _ItemEtsyFormError = __webpack_require__(594);
+
+var _ItemEtsyFormError2 = _interopRequireDefault(_ItemEtsyFormError);
+
+var _ItemEtsyFormFields = __webpack_require__(595);
+
+var _ItemEtsyFormFields2 = _interopRequireDefault(_ItemEtsyFormFields);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ItemEtsyForm = function (_Component) {
+    _inherits(ItemEtsyForm, _Component);
+
+    function ItemEtsyForm() {
+        _classCallCheck(this, ItemEtsyForm);
+
+        return _possibleConstructorReturn(this, (ItemEtsyForm.__proto__ || Object.getPrototypeOf(ItemEtsyForm)).apply(this, arguments));
+    }
+
+    _createClass(ItemEtsyForm, [{
+        key: 'render',
+        value: function render() {
+            console.log('render etsy form');
+            return _react2.default.createElement(
+                'form',
+                {
+                    className: 'item-form form-horizontal container-fluid' },
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    'Etsy Listing'
+                ),
+                _react2.default.createElement(_reduxForm.Field, { type: 'hidden', component: 'input', name: 'id' }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-9' },
+                    _react2.default.createElement(_ItemEtsyFormError2.default, null),
+                    _react2.default.createElement(_ItemEtsyFormFields2.default, {
+                        form: this.props.form,
+                        item: this.props.item,
+                        change: this.props.change
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-3' },
+                    _react2.default.createElement(_ItemEtsyFormCTA2.default, {
+                        handleSubmit: this.props.handleSubmit,
+                        pristine: this.props.pristine,
+                        submitting: this.props.submitting,
+                        reset: this.props.reset
+                    })
+                )
+            );
+        }
+    }]);
+
+    return ItemEtsyForm;
+}(_react.Component);
+
+ItemEtsyForm.propTypes = {
+    form: _propTypes2.default.string.isRequired,
+    handleSubmit: _propTypes2.default.func.isRequired,
+    pristine: _propTypes2.default.bool.isRequired,
+    submitting: _propTypes2.default.bool.isRequired,
+    item: _propTypes2.default.object.isRequired
+};
+exports.default = (0, _reduxForm.reduxForm)({
+    keepDirtyOnReinitialize: false,
+    enableReinitialize: true
+})(ItemEtsyForm);
+
+/***/ }),
+/* 593 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(20);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _reactRedux = __webpack_require__(10);
+
+var _items = __webpack_require__(27);
+
+var _ItemModal = __webpack_require__(361);
+
+var _ItemModal2 = _interopRequireDefault(_ItemModal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ItemEtsyFormCTA = function (_Component) {
+    _inherits(ItemEtsyFormCTA, _Component);
+
+    function ItemEtsyFormCTA(props) {
+        _classCallCheck(this, ItemEtsyFormCTA);
+
+        var _this = _possibleConstructorReturn(this, (ItemEtsyFormCTA.__proto__ || Object.getPrototypeOf(ItemEtsyFormCTA)).call(this, props));
+
+        _this.submit = function (values) {
+            //       return this.props.saveItem(values);
+        };
+
+        _this.deleteItem = function (values) {
+            console.log(values);
+            if (!!values.id) {
+                return _this.setState({
+                    modalTitle: 'Delete Item',
+                    modalDescription: _react2.default.createElement(
+                        'p',
+                        null,
+                        'Are you sure?'
+                    ),
+                    modalButtonText: 'Yes, Duh',
+                    modalOpen: true,
+                    modalButtonAction: function modalButtonAction() {
+                        _this.setState({
+                            modalOpen: false
+                        });
+                        //                    return this.props.deleteItem(values);
+                    }
+                });
+            }
+            return _this.props.deleteNewItem();
+        };
+
+        _this.onModalClose = function () {
+            _this.setState({
+                modalOpen: false
+            });
+        };
+
+        _this.state = {
+            modalTitle: '',
+            modalDescription: null,
+            modalButtonText: '',
+            modalOpen: false,
+            modalButtonAction: _this.onModalClose
+        };
+        return _this;
+    }
+
+    _createClass(ItemEtsyFormCTA, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _ItemModal2.default,
+                    {
+                        title: this.state.modalTitle,
+                        open: this.state.modalOpen,
+                        onClose: this.onModalClose,
+                        buttonText: this.state.modalButtonText,
+                        buttonAction: this.state.modalButtonAction },
+                    this.state.modalDescription
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'list-group' },
+                    _react2.default.createElement(
+                        'button',
+                        {
+                            onClick: this.props.handleSubmit(this.submit),
+                            type: 'submit',
+                            disabled: this.props.pristine || this.props.submitting,
+                            className: (0, _classnames2.default)("list-group-item list-group-item-success", { 'disabled': this.props.pristine || this.props.submitting }) },
+                        'Save'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        {
+                            onClick: this.props.reset,
+                            type: 'button',
+                            disabled: this.props.pristine || this.props.submitting,
+                            className: (0, _classnames2.default)("list-group-item list-group-item-warning", { 'disabled': this.props.pristine || this.props.submitting }) },
+                        'Reset'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ItemEtsyFormCTA;
+}(_react.Component);
+
+ItemEtsyFormCTA.propTypes = {
+    handleSubmit: _propTypes2.default.func.isRequired,
+    pristine: _propTypes2.default.bool.isRequired,
+    reset: _propTypes2.default.func.isRequired
+};
+
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {};
+};
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(ItemEtsyFormCTA);
+
+/***/ }),
+/* 594 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ItemEtsyFormError = function (_Component) {
+    _inherits(ItemEtsyFormError, _Component);
+
+    function ItemEtsyFormError() {
+        _classCallCheck(this, ItemEtsyFormError);
+
+        return _possibleConstructorReturn(this, (ItemEtsyFormError.__proto__ || Object.getPrototypeOf(ItemEtsyFormError)).apply(this, arguments));
+    }
+
+    _createClass(ItemEtsyFormError, [{
+        key: 'render',
+        value: function render() {
+            return !jQuery.isEmptyObject(this.props.errors) && _react2.default.createElement('div', {
+                className: 'alert alert-danger',
+                role: 'alert' });
+        }
+    }]);
+
+    return ItemEtsyFormError;
+}(_react.Component);
+
+ItemEtsyFormError.propTypes = {
+    errors: _propTypes2.default.object.isRequired
+};
+
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        errors: {}
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(ItemEtsyFormError);
+
+/***/ }),
+/* 595 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _ItemImageInput = __webpack_require__(564);
+
+var _ItemImageInput2 = _interopRequireDefault(_ItemImageInput);
+
+var _ItemEtsySearch = __webpack_require__(565);
+
+var _ItemEtsySearch2 = _interopRequireDefault(_ItemEtsySearch);
+
+var _reduxForm = __webpack_require__(95);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ItemEtsyFormFields = function (_Component) {
+    _inherits(ItemEtsyFormFields, _Component);
+
+    function ItemEtsyFormFields() {
+        _classCallCheck(this, ItemEtsyFormFields);
+
+        return _possibleConstructorReturn(this, (ItemEtsyFormFields.__proto__ || Object.getPrototypeOf(ItemEtsyFormFields)).apply(this, arguments));
+    }
+
+    _createClass(ItemEtsyFormFields, [{
+        key: 'render',
+
+
+        /*state(pin): "active"
+        user_id(pin): 7738069
+        category_id(pin): 69150425
+        title(pin): "Set of 10 Ruby Red Glass Cups - Deep Red Glass Rocks Barware Cups - 10 Red Chiseled Cocktail Glasses - Statement Water Glass Cups Tablescape"
+        description(pin): "Ruby Red Glass Rocks Glasses - Rare large set of 10 - Gorgeous chiseled glass look - Stunning addition for a holiday dinner tablescape - Great as both cocktail and water glasses - Impress your guests with this phenomenal set! Measures: 4&quot; tall 3&quot; diameter CONDITION REFERENCE CHART RATING: &quot;Pristine&quot; No chips, scratches, cracks, or breakages. Flawless! Thanks for looking and check out my other listings at: https://www.etsy.com/shop/RachaelsRealm?ref=hdr_shop_menu RACHAEL&#39;S GIVES 10% TO A LOCAL NONPROFIT. More information available in my shop announcement, &quot;About&quot; section, AND in my bio. Thank you!"
+        creation_tsz(pin): 1528870212
+        ending_tsz(pin): 1539411012
+        original_creation_tsz(pin): 1507701257
+        last_modified_tsz(pin): 1528920494
+        price(pin): "62.00"
+        currency_code(pin): "USD"
+        quantity(pin): 1
+        sku(pin):
+        shop_section_id(pin): 20133227
+        featured_rank(pin): null
+        state_tsz(pin): 1507701257
+        url(pin): "https://www.etsy.com/listing/563977743/set-of-10-ruby-red-glass-cups-deep-red?utm_source=shoprachaelsinventor&utm_medium=api&utm_campaign=api"
+        views(pin): 47
+        num_favorers(pin): 13
+        shipping_template_id(pin): 22676174273
+        processing_min(pin): 1
+        processing_max(pin): 2
+        who_made(pin): "someone_else"
+        is_supply(pin): "false"
+        when_made(pin): "before_1999"
+        item_weight(pin): "144"
+        item_weight_units(pin): null
+        item_length(pin): "18"
+        item_width(pin): "12"
+        item_height(pin): "8"
+        item_dimensions_unit(pin): "in"
+        is_private(pin): false
+        recipient(pin): null
+        occasion(pin): null
+        style(pin): null
+        non_taxable(pin): false
+        is_customizable(pin): false
+        is_digital(pin): false
+        file_data(pin): ""
+        can_write_inventory(pin): true
+        should_auto_renew(pin): true
+        language(pin): "en-US"
+        has_variations(pin): false
+        taxonomy_id(pin): 1071
+        0(pin): "Home & Living"
+        1(pin): "Kitchen & Dining"
+        2(pin): "Drink & Barware"
+        3(pin): "Drinkware"
+        4(pin): "Tumblers & Water Glasses"
+        used_manufacturer(pin): false*/
+
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'panel panel-default' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-8' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'label',
+                            { htmlFor: 'inputEtsyTitle', className: 'col-sm-3 control-label' },
+                            'Title'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-sm-9' },
+                            _react2.default.createElement(_reduxForm.Field, {
+                                className: 'form-control',
+                                id: 'inputEtsyTitle',
+                                name: 'title',
+                                component: 'input'
+                            })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'label',
+                            { htmlFor: 'inputEtsyDescription', className: 'col-sm-3 control-label' },
+                            'Description'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-sm-9' },
+                            _react2.default.createElement(_reduxForm.Field, {
+                                className: 'form-control',
+                                id: 'inputEtsyDescription',
+                                name: 'description',
+                                component: 'input'
+                            })
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-4' },
+                    _react2.default.createElement(_reduxForm.Field, {
+                        name: 'image_url',
+                        props: {
+                            form: this.props.form,
+                            name: "image_url",
+                            loading: false
+                        },
+                        component: _ItemImageInput2.default
+                    })
+                ),
+                _react2.default.createElement('div', { className: 'clearfix' })
+            );
+        }
+    }]);
+
+    return ItemEtsyFormFields;
+}(_react.Component);
+
+ItemEtsyFormFields.propTypes = {
+    form: _propTypes2.default.string.isRequired,
+    item: _propTypes2.default.object.isRequired,
+    change: _propTypes2.default.func.isRequired };
+exports.default = ItemEtsyFormFields;
 
 /***/ })
 /******/ ]);

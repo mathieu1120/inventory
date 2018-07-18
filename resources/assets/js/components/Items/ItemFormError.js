@@ -5,7 +5,7 @@ import {
     getFormErrorsFromState
 } from '../../selectors/inventory/items';
 
-class ItemFormWrapper extends Component {
+class ItemFormError extends Component {
     static propTypes = {
         errors: PropTypes.object.isRequired
     }
@@ -43,4 +43,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps)(ItemFormWrapper);
+export default connect(mapStateToProps)(ItemFormError);

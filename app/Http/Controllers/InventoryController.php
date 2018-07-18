@@ -8,6 +8,7 @@ use Etsy\EtsyApi;
 use Etsy\EtsyClient;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use InstagramAPI\Instagram;
 
 class InventoryController extends Controller
 {
@@ -176,7 +177,7 @@ class InventoryController extends Controller
         $api = new EtsyApi($client);
 
         return $response->setData([
-            'searchResults' => $api->getListing([
+            'item' => $api->getListing([
                 'params' => [
                     'listing_id' => $listingId,
                 ]

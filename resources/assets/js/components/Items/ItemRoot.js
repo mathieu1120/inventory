@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ItemList from './ItemList';
 import ItemFormWrapper from './ItemFormWrapper';
+import ItemEtsyFormWrapper from './ItemEtsyFormWrapper';
 import {connect} from 'react-redux';
 import {
     getItemsFromState,
@@ -9,6 +10,9 @@ import {
     getNextOffsetItemsFromState,
     getLoadingFromState
 } from '../../selectors/inventory/items';
+import {
+    getEtsyItemFromState
+} from '../../selectors/inventory/etsy';
 
 import {getItems} from '../../actions/inventory/items';
 import {getEtsyItem} from '../../actions/inventory/etsy';
@@ -20,7 +24,8 @@ export class ItemRoot extends Component {
         totalItems: PropTypes.number.isRequired,
         loading: PropTypes.bool.isRequired,
         nextOffset: PropTypes.number.isRequired,
-        getEtsyItem: PropTypes.func.isRequired
+        getEtsyItem: PropTypes.func.isRequired,
+        etsyItem: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -34,12 +39,15 @@ export class ItemRoot extends Component {
 
     }
 
-    componentWillReceiveProps = (nextProps) => {
-        console.log('new props');
+    componentWillReceiveProps = (nextProps, nextState) => {
+        if (this.state.items.length === 0
+            && nextProps.items.length > 0) {
+            this.props.getEtsyItem(nextProps.items[this.state.selectedItemIndex].etsy_listing_id);
+        }
+
         this.setState({
             items: nextProps.items
         });
-
     }
 
     componentDidMount = () => {
@@ -138,6 +146,10 @@ export class ItemRoot extends Component {
                             deleteNewItem={this.deleteNewItem}
                         />
                     }
+                    {
+                        !!this.props.etsyItem.listing_id &&
+                        <ItemEtsyFormWrapper item={this.props.etsyItem} />
+                    }
                 </div>
                 {
                     ((this.state.items.length <= 0 && !this.state.search) || this.props.loading) &&
@@ -159,7 +171,8 @@ const mapStateToProps = (state) => {
         items: getItemsFromState(state),
         totalItems: getTotalItemsFromState(state),
         nextOffset: getNextOffsetItemsFromState(state),
-        loading: getLoadingFromState(state)
+        loading: getLoadingFromState(state),
+        etsyItem: getEtsyItemFromState(state)
     };
 }
 

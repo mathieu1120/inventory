@@ -20,6 +20,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "lusitanian/oauth": "^0.8.11",
+        "mgp25/instagram-php": "^4.1",
         "oauth-io/oauth": "^0.3.2",
         "oriceon/oauth-5-laravel": "^1.0"
     },
