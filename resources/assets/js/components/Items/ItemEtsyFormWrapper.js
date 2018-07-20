@@ -11,7 +11,11 @@ export default class ItemEtsyFormWrapper extends Component {
         return (
             <ItemEtsyForm
                 item={this.props.item}
-                initialValues={{...this.props.item}}
+                initialValues={{
+                    ...this.props.item,
+                    tags: this.props.item.tags.join('\n'),
+                    materials: this.props.item.materials.join('\n')
+                }}
                 form={`etsyItem`}
             />
         );

@@ -12,6 +12,14 @@ export default class ItemEtsyFormFields extends Component {
         change: PropTypes.func.isRequired
     }
 
+    parseNumber = (value) => {
+        return Number(value);
+    }
+
+    parseCommaToNewLine = (value) => {
+        return value.split(',').join('\n');
+    }
+
     getListOfFields = () => {
         return [
             {
@@ -19,37 +27,45 @@ export default class ItemEtsyFormFields extends Component {
                 type: 'hidden'
             },
             {
-                name: 'title'
+                name: 'title',
+                component: 'textarea',
+                props: {rows: 3}
             },
             {
                 name: 'description',
-                component: 'textarea'
+                component: 'textarea',
+                props: {rows: 3}
             },
             {
                 name: 'quantity',
-                number: 'int'
+                type: 'number',
+                parse: this.parseNumber
             },
             {
                 name: 'price',
-                number: 'float'
+                type: 'number',
+                parse: this.parseNumber
             },
             {
                 name: 'materials',
-                component: 'textarea'
+                component: 'textarea',
+                parse: this.parseCommaToNewLine,
+                props: {rows: 3}
             },
             {
-                name: 'renew',
+                name: 'should_auto_renew',
                 type: 'checkbox'
             },
             {
                 name: 'shipping_template_id',
-                component: 'select'
+                component: 'select',
+                label: 'Shipping Template'
             },
             {
                 name: 'state',
                 component: 'select',
                 options: [
-                    'active', 'inactive', 'draft'
+                    '', 'active', 'inactive', 'draft'
                 ]
             },
             {
@@ -58,19 +74,23 @@ export default class ItemEtsyFormFields extends Component {
             },
             {
                 name: 'item_weight',
-                number: 'float'
+                type: 'number',
+                parse: this.parseNumber
             },
             {
                 name: 'item_length',
-                number: 'float'
+                type: 'number',
+                parse: this.parseNumber
             },
             {
                 name: 'item_width',
-                number: 'float'
+                type: 'number',
+                parse: this.parseNumber
             },
             {
                 name: 'item_height',
-                number: 'float'
+                type: 'number',
+                parse: this.parseNumber
             },
             {
                 name: 'non_taxable',
@@ -82,13 +102,15 @@ export default class ItemEtsyFormFields extends Component {
             },
             {
                 name: 'tags',
-                component: 'textarea'
+                component: 'textarea',
+                parse: this.parseCommaToNewLine,
+                props: {rows: 3}
             },
             {
                 name: 'who_made',
                 component: 'select',
                 options: [
-                    'i_did', 'collective', 'someone_else'
+                    '', 'i_did', 'collective', 'someone_else'
                 ]
             },
             {
@@ -99,6 +121,7 @@ export default class ItemEtsyFormFields extends Component {
                 name: 'when_made',
                 component: 'select',
                 options: [
+                    '',
                     'made_to_order',
                     '2010_2018',
                     '2000_2009',
@@ -123,6 +146,7 @@ export default class ItemEtsyFormFields extends Component {
                 name: 'recipient',
                 component: 'select',
                 options: [
+                    '',
                     'men',
                     'women',
                     'unisex_adults',
@@ -136,7 +160,7 @@ export default class ItemEtsyFormFields extends Component {
             {
                 name: 'occasion',
                 component: 'select',
-                options: [
+                options: ['',
                     'anniversary', 'baptism', 'bar_or_bat_mitzvah', 'birthday', 'canada_day', 'chinese_new_year',
                     'cinco_de_mayo', 'confirmation', 'christmas', 'day_of_the_dead', 'easter', 'eid', 'engagement',
                     'fathers_day', 'get_well', 'graduation', 'halloween', 'hanukkah', 'housewarming', 'kwanzaa', 'prom',
@@ -147,21 +171,47 @@ export default class ItemEtsyFormFields extends Component {
         ]
     }
 
+    renderFormFields = () => {
+        return this.getListOfFields().map((field, index) => {
+            return (
+                <div key={index} className="form-group">
+                    {
+                        !!field.type && field.type === 'hidden' ? null :
+                        <label htmlFor={`inputEtsy${field.name}`}
+                               className="col-sm-3 control-label">
+                            {!!field.label ? field.label : field.name.charAt(0).toUpperCase() + field.name.slice(1).split('_').join(' ')}
+                        </label>
+                    }
+                    <div className="col-sm-9">
+                        <Field
+                            parse={!!field.parse ? value => field.parse(value) : null }
+                            className="form-control"
+                            id={`inputEtsy${field.name}`}
+                            name={field.name}
+                            component={!!field.component ? field.component : 'input'}
+                            type={!!field.type ? field.type : 'text'}
+                            props={!!field.props ? field.props : null}
+                        >
+                            {
+                                !!field.options
+                                    ?
+                                    field.options.map((option, index) => {
+                                        return (<option key={index} value={option}>{option}</option>);
+                                    })
+                                    : null
+                            }
+                        </Field>
+                    </div>
+                </div>
+            );
+        });
+    }
+
     render() {
         return (
             <div className="panel panel-default">
                 <div className="col-md-8">
-                    <div className="form-group">
-                        <label htmlFor="inputEtsyTitle" className="col-sm-3 control-label">Title</label>
-                        <div className="col-sm-9">
-                            <Field
-                                className="form-control"
-                                id="inputEtsyTitle"
-                                name="title"
-                                component="input"
-                            />
-                        </div>
-                    </div>
+                    {this.renderFormFields()}
                 </div>
                 <div className="col-md-4">
                     <Field
