@@ -25,8 +25,8 @@ class ItemImageInput extends Component {
         }
     }
 
-    onChange = (event) => {
-        return this.props.uploadImage(event.target.files[0], 'image_url');
+    onChange = (event, name) => {
+        return this.props.uploadImage(event.target.files[0], name);
     }
 
     render() {
@@ -36,7 +36,7 @@ class ItemImageInput extends Component {
                     <input
                         id={this.props.input.name}
                         type="file"
-                        onChange={(event) => this.onChange(event)}
+                        onChange={(event) => this.onChange(event, this.props.name)}
                     />
                     <img
                         src={
@@ -65,9 +65,9 @@ class ItemImageInput extends Component {
     }
 }
 
-const makeMapStateToProps = (state) => {
+const makeMapStateToProps = (state, props) => {
     return {
-        uploadedUrl: getUploadedImageUrlFromState(state, 'image_url'),
+        uploadedUrl: getUploadedImageUrlFromState(state, props.name),
         loading: getLoadingImageUploadFromState(state)
     };
 }

@@ -17490,8 +17490,8 @@ var ItemImageInput = function (_Component) {
             if (_this.props.uploadedUrl !== nextProps.uploadedUrl) {
                 _this.props.input.onChange(nextProps.uploadedUrl);
             }
-        }, _this.onChange = function (event) {
-            return _this.props.uploadImage(event.target.files[0], 'image_url');
+        }, _this.onChange = function (event, name) {
+            return _this.props.uploadImage(event.target.files[0], name);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -17510,7 +17510,7 @@ var ItemImageInput = function (_Component) {
                         id: this.props.input.name,
                         type: 'file',
                         onChange: function onChange(event) {
-                            return _this2.onChange(event);
+                            return _this2.onChange(event, _this2.props.name);
                         }
                     }),
                     _react2.default.createElement('img', {
@@ -17546,9 +17546,9 @@ ItemImageInput.propTypes = (_ItemImageInput$propT = {
 }, _defineProperty(_ItemImageInput$propT, 'loading', _propTypes2.default.bool.isRequired), _defineProperty(_ItemImageInput$propT, 'url', _propTypes2.default.string), _ItemImageInput$propT);
 
 
-var makeMapStateToProps = function makeMapStateToProps(state) {
+var makeMapStateToProps = function makeMapStateToProps(state, props) {
     return {
-        uploadedUrl: (0, _items.getUploadedImageUrlFromState)(state, 'image_url'),
+        uploadedUrl: (0, _items.getUploadedImageUrlFromState)(state, props.name),
         loading: (0, _items.getLoadingImageUploadFromState)(state)
     };
 };
@@ -76552,10 +76552,17 @@ var ItemEtsyFormFields = function (_Component) {
             }];
         }, _this.renderFormFields = function () {
             return _this.getListOfFields().map(function (field, index) {
-                return _react2.default.createElement(
+                return !!field.type && field.type === 'hidden' ? _react2.default.createElement(_reduxForm.Field, {
+                    key: index,
+                    parse: !!field.parse ? function (value) {
+                        return field.parse(value);
+                    } : null,
+                    name: field.name,
+                    component: 'input',
+                    type: 'hidden' }) : _react2.default.createElement(
                     'div',
                     { key: index, className: 'form-group' },
-                    !!field.type && field.type === 'hidden' ? null : _react2.default.createElement(
+                    _react2.default.createElement(
                         'label',
                         { htmlFor: 'inputEtsy' + field.name,
                             className: 'col-sm-3 control-label' },
