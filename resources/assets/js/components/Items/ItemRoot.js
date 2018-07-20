@@ -147,7 +147,7 @@ export class ItemRoot extends Component {
                         />
                     }
                     {
-                        !!this.props.etsyItem.listing_id &&
+                        !!this.props.etsyItem.item && !!this.props.etsyItem.item.results[0].listing_id &&
                         <ItemEtsyFormWrapper item={this.props.etsyItem} />
                     }
                 </div>

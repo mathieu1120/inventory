@@ -181,6 +181,11 @@ class InventoryController extends Controller
                 'params' => [
                     'listing_id' => $listingId,
                 ]
+            ]),
+            'images' => $api->findAllListingImages([
+                'params' => [
+                    'listing_id' => $listingId,
+                ]
             ])
         ]);
     }

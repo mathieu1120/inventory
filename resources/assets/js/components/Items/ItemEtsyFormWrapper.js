@@ -8,13 +8,21 @@ export default class ItemEtsyFormWrapper extends Component {
     }
 
     render() {
+        const {
+            images,
+            item
+        } = this.props.item
+
         return (
             <ItemEtsyForm
-                item={this.props.item}
+                item={item.results[0]}
                 initialValues={{
-                    ...this.props.item,
-                    tags: this.props.item.tags.join('\n'),
-                    materials: this.props.item.materials.join('\n')
+                    ...item.results[0],
+                    tags: item.results[0].tags.join('\n'),
+                    materials: item.results[0].materials.join('\n'),
+                    images: images.results.map(image => {
+                        return {image_url : image['url_fullxfull']};
+                    })
                 }}
                 form={`etsyItem`}
             />

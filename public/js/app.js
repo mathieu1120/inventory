@@ -60805,7 +60805,7 @@ var ItemRoot = exports.ItemRoot = function (_Component) {
                         selectedItem: selectedItem,
                         deleteNewItem: this.deleteNewItem
                     }),
-                    !!this.props.etsyItem.listing_id && _react2.default.createElement(_ItemEtsyFormWrapper2.default, { item: this.props.etsyItem })
+                    !!this.props.etsyItem.item && !!this.props.etsyItem.item.results[0].listing_id && _react2.default.createElement(_ItemEtsyFormWrapper2.default, { item: this.props.etsyItem })
                 ),
                 (this.state.items.length <= 0 && !this.state.search || this.props.loading) && _react2.default.createElement(
                     'div',
@@ -76060,11 +76060,19 @@ var ItemEtsyFormWrapper = function (_Component) {
     _createClass(ItemEtsyFormWrapper, [{
         key: 'render',
         value: function render() {
+            var _props$item = this.props.item,
+                images = _props$item.images,
+                item = _props$item.item;
+
+
             return _react2.default.createElement(_ItemEtsyForm2.default, {
-                item: this.props.item,
-                initialValues: _extends({}, this.props.item, {
-                    tags: this.props.item.tags.join('\n'),
-                    materials: this.props.item.materials.join('\n')
+                item: item.results[0],
+                initialValues: _extends({}, item.results[0], {
+                    tags: item.results[0].tags.join('\n'),
+                    materials: item.results[0].materials.join('\n'),
+                    images: images.results.map(function (image) {
+                        return { image_url: image['url_fullxfull'] };
+                    })
                 }),
                 form: 'etsyItem'
             });
@@ -76580,6 +76588,25 @@ var ItemEtsyFormFields = function (_Component) {
                     )
                 );
             });
+        }, _this.renderImages = function (_ref2) {
+            var fields = _ref2.fields;
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                fields.map(function (field, index) {
+                    return _react2.default.createElement(_reduxForm.Field, {
+                        key: index,
+                        name: field + '.image_url',
+                        props: {
+                            form: _this.props.form,
+                            name: field + '.image_url',
+                            loading: false
+                        },
+                        component: _ItemImageInput2.default
+                    });
+                })
+            );
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -76597,14 +76624,9 @@ var ItemEtsyFormFields = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'col-md-4' },
-                    _react2.default.createElement(_reduxForm.Field, {
-                        name: 'image_url',
-                        props: {
-                            form: this.props.form,
-                            name: "image_url",
-                            loading: false
-                        },
-                        component: _ItemImageInput2.default
+                    _react2.default.createElement(_reduxForm.FieldArray, {
+                        name: 'images',
+                        component: this.renderImages
                     })
                 ),
                 _react2.default.createElement('div', { className: 'clearfix' })
@@ -77007,7 +77029,7 @@ function etsyItem() {
 
     switch (action.type) {
         case _etsy.ETSY_ACTION.GET_ITEM.SUCCESS:
-            return action.response.item.results[0];
+            return action.response;
         default:
             return state;
     }
