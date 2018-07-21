@@ -20,7 +20,6 @@ class ItemEtsyForm extends Component {
         return (
             <form
                 className="item-form form-horizontal container-fluid">
-                <h2>Etsy Listing</h2>
                 <Field type="hidden" component="input" name="id"/>
                 <div className="col-md-9">
                     <ItemEtsyFormError />

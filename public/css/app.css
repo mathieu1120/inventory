@@ -8432,6 +8432,7 @@ button.close {
 .item-form.container-fluid {
   padding-left: 0;
   padding-right: 0;
+  margin-top: 15px;
 }
 
 .item-form.container-fluid .col-md-9 {
@@ -8511,5 +8512,9 @@ button.close {
 
 .etsy-results.list-group {
   height: auto;
+}
+
+.hide {
+  display: none;
 }
 

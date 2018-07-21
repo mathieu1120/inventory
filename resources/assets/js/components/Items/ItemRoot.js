@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ItemList from './ItemList';
-import ItemFormWrapper from './ItemFormWrapper';
-import ItemEtsyFormWrapper from './ItemEtsyFormWrapper';
+import ItemTabs from './ItemTabs';
 import {connect} from 'react-redux';
 import {
     getItemsFromState,
@@ -10,12 +9,8 @@ import {
     getNextOffsetItemsFromState,
     getLoadingFromState
 } from '../../selectors/inventory/items';
-import {
-    getEtsyItemFromState
-} from '../../selectors/inventory/etsy';
 
 import {getItems} from '../../actions/inventory/items';
-import {getEtsyItem} from '../../actions/inventory/etsy';
 
 export class ItemRoot extends Component {
     static propTypes = {
@@ -23,9 +18,7 @@ export class ItemRoot extends Component {
         getItems: PropTypes.func.isRequired,
         totalItems: PropTypes.number.isRequired,
         loading: PropTypes.bool.isRequired,
-        nextOffset: PropTypes.number.isRequired,
-        getEtsyItem: PropTypes.func.isRequired,
-        etsyItem: PropTypes.object.isRequired
+        nextOffset: PropTypes.number.isRequired
     }
 
     constructor(props) {
@@ -40,11 +33,6 @@ export class ItemRoot extends Component {
     }
 
     componentWillReceiveProps = (nextProps, nextState) => {
-        if (this.state.items.length === 0
-            && nextProps.items.length > 0) {
-            this.props.getEtsyItem(nextProps.items[this.state.selectedItemIndex].etsy_listing_id);
-        }
-
         this.setState({
             items: nextProps.items
         });
@@ -58,9 +46,6 @@ export class ItemRoot extends Component {
         this.setState({
             selectedItemIndex: index
         });
-        if (!!this.state.items[index].etsy_listing_id) {
-            this.props.getEtsyItem(this.state.items[index].etsy_listing_id);
-        }
     }
 
     getMoreItems = () => {
@@ -141,14 +126,12 @@ export class ItemRoot extends Component {
                 <div className="col-md-9">
                     {
                         this.state.items.length > 0 &&
-                        <ItemFormWrapper
-                            selectedItem={selectedItem}
-                            deleteNewItem={this.deleteNewItem}
-                        />
-                    }
-                    {
-                        !!this.props.etsyItem.item && !!this.props.etsyItem.item.results[0].listing_id &&
-                        <ItemEtsyFormWrapper item={this.props.etsyItem} />
+                        <div>
+                            <ItemTabs
+                                selectedItem={selectedItem}
+                                deleteNewItem={this.deleteNewItem}
+                            />
+                        </div>
                     }
                 </div>
                 {
@@ -171,8 +154,7 @@ const mapStateToProps = (state) => {
         items: getItemsFromState(state),
         totalItems: getTotalItemsFromState(state),
         nextOffset: getNextOffsetItemsFromState(state),
-        loading: getLoadingFromState(state),
-        etsyItem: getEtsyItemFromState(state)
+        loading: getLoadingFromState(state)
     };
 }
 
@@ -180,9 +162,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getItems: (search, offset) => {
             return dispatch(getItems(search, offset));
-        },
-        getEtsyItem: (id) => {
-            return dispatch(getEtsyItem(id));
         }
     };
 }

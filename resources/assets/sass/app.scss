@@ -63,6 +63,7 @@
 .item-form.container-fluid {
   padding-left: 0;
   padding-right: 0;
+  margin-top: 15px;
   .col-md-9 {
     padding-left: 0;
   }
@@ -135,4 +136,8 @@
 
 .etsy-results.list-group {
   height: auto;
+}
+
+.hide {
+  display: none;
 }

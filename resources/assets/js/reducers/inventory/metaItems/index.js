@@ -11,7 +11,8 @@ const metaItemsState = {
     total_items: 0,
     next_offset: 0,
     loading_item_image_upload: false,
-    loading_etsy_search: false
+    loading_etsy_search: false,
+    loading_etsy_form: false
 };
 
 export default function metaItems(state = metaItemsState, action) {
@@ -79,6 +80,14 @@ export default function metaItems(state = metaItemsState, action) {
                     loading_etsy_search: false
                 });
             }
+        case ETSY_ACTION.GET_ITEM.PENDING:
+            return Object.assign({}, state, {
+                loading_etsy_form: true
+            });
+        case ETSY_ACTION.GET_ITEM.SUCCESS:
+            return Object.assign({}, state, {
+                loading_etsy_form: false
+            });
         default:
             return state;
     }

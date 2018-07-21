@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ItemImageInput from './ItemImageInput';
-import ItemEtsySearch from './ItemEtsySearch';
 import {Field, FieldArray} from 'redux-form';
 
 export default class ItemEtsyFormFields extends Component {
@@ -230,6 +229,7 @@ export default class ItemEtsyFormFields extends Component {
                         );
                     })
                 }
+                <button className="btn btn-default" type="button" onClick={() => fields.push()}>Add Picture</button>
             </div>
         );
     }
