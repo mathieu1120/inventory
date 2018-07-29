@@ -40,7 +40,7 @@ export const ITEM_ACTION = {
     }
 };
 
-export function getItems(search = '', offset = 0) {
+export function getItems(search = '', offset = 0, orderBy = 'name', orderType = 'asc') {
     return dispatch => {
         dispatch({
             type: offset ? ITEM_ACTION.GET_MORE_LIST.PENDING : ITEM_ACTION.GET_LIST.PENDING
@@ -48,7 +48,7 @@ export function getItems(search = '', offset = 0) {
 
         let headers = {};
 
-        return sdk.resources.inventory.items.list(search, offset)
+        return sdk.resources.inventory.items.list(search, offset, orderBy, orderType)
             .then(response => {
                 headers = response.headers;
 

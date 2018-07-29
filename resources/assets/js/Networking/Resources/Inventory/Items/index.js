@@ -6,8 +6,8 @@ export default class Items extends AbstractResource {
         return 'api/inventory';
     }
 
-    list(search, offset) {
-        return this.get(`items?offset=${!!offset ? offset : 0}&search=${!!search ? search : ''}`);
+    list(search, offset, orderBy, orderType) {
+        return this.get(`items?offset=${!!offset ? offset : 0}&search=${!!search ? search : ''}&orderby=${orderBy}&ordertype=${orderType}`);
     }
 
     uploadImage(file) {

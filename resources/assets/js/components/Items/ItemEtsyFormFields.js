@@ -46,6 +46,12 @@ export default class ItemEtsyFormFields extends Component {
                 parse: this.parseNumber
             },
             {
+                name: 'sku',
+                component: 'textarea',
+                parse: this.parseCommaToNewLine,
+                props: {rows: 3}
+            },
+            {
                 name: 'materials',
                 component: 'textarea',
                 parse: this.parseCommaToNewLine,

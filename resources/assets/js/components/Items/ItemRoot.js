@@ -11,6 +11,7 @@ import {
 } from '../../selectors/inventory/items';
 
 import {getItems} from '../../actions/inventory/items';
+import ItemListOrder from './ItemListOrder';
 
 export class ItemRoot extends Component {
     static propTypes = {
@@ -27,6 +28,8 @@ export class ItemRoot extends Component {
         this.state = {
             items: props.items,
             selectedItemIndex: 0,
+            orderBy: 'name',
+            orderType: 'asc',
             search: ''
         }
 
@@ -49,7 +52,15 @@ export class ItemRoot extends Component {
     }
 
     getMoreItems = () => {
-        return this.props.getItems(this.state.search, this.props.nextOffset);
+        return this.props.getItems(this.state.search, this.props.nextOffset, this.state.orderBy, this.state.orderType);
+    }
+
+    getItemsByOrder = (orderBy, orderType) => {
+        this.setState({
+            orderBy: orderBy,
+            orderType: orderType
+        });
+        return this.props.getItems(this.state.search, 0, orderBy, orderType);
     }
 
     createNewItem = () => {
@@ -75,7 +86,7 @@ export class ItemRoot extends Component {
         this.setState({
             search: event.target.value
         })
-        return this.props.getItems(event.target.value);
+        return this.props.getItems(event.target.value, this.props.nextOffset, this.state.orderBy, this.state.orderType);
     }
 
     render() {
@@ -115,13 +126,20 @@ export class ItemRoot extends Component {
                             </div>
                         </div>
                     }
-                    <ItemList
-                        items={this.state.items}
-                        onSelectItem={this.onSelectItem}
-                        selectedItem={selectedItem}
-                        getMoreItems={this.getMoreItems}
-                        loadMore={this.props.nextOffset > 0}
-                    />
+                    <div className="panel panel-default">
+                        <ItemListOrder
+                            getItems={this.getItemsByOrder}
+                            orderBy={this.state.orderBy}
+                            orderType={this.state.orderType}
+                        />
+                        <ItemList
+                            items={this.state.items}
+                            onSelectItem={this.onSelectItem}
+                            selectedItem={selectedItem}
+                            getMoreItems={this.getMoreItems}
+                            loadMore={this.props.nextOffset > 0}
+                        />
+                    </div>
                 </div>
                 <div className="col-md-9">
                     {
@@ -160,8 +178,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getItems: (search, offset) => {
-            return dispatch(getItems(search, offset));
+        getItems: (search, offset, orderBy = 'name', orderType = 'asc') => {
+            return dispatch(getItems(search, offset, orderBy, orderType));
         }
     };
 }

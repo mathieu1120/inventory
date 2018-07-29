@@ -19,7 +19,7 @@
     "bootstrap-sass": "^3.3.7",
     "cross-env": "^5.0.1",
     "jquery": "^3.1.1",
-    "laravel-mix": "^1.0",
+    "laravel-mix": "^2.1.11",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
@@ -34,6 +34,7 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
+    "truncate": "^2.0.1",
     "whatwg-fetch": "^2.0.4"
   }
 }

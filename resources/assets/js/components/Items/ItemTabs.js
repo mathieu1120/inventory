@@ -18,6 +18,14 @@ export default class ItemTabs extends Component {
         };
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        if (this.props.selectedItem.id !== nextProps.selectedItem.id) {
+            this.setState({
+                index: 0
+            });
+        }
+    }
+
     render() {
         return (
             <div>
@@ -36,7 +44,7 @@ export default class ItemTabs extends Component {
                         </a>
                     </li>
                     {
-                        this.props.selectedItem.etsy_listing_id &&
+                        this.props.selectedItem.etsy_listing_id > 0 &&
                         <li className={
                             classnames({
                                 "active": (this.state.index === 1)
@@ -50,6 +58,19 @@ export default class ItemTabs extends Component {
                             </a>
                         </li>
                     }
+                    <li
+                        className={
+                            classnames({
+                                "active": (this.state.index === 2)
+                            })}
+                        onClick={() => this.setState({
+                            index: 2
+                        })}
+                    >
+                        <a href="#">
+                            Instagram
+                        </a>
+                    </li>
                 </ul>
                 <div className={classnames({
                     'hide': (this.state.index !== 0)
@@ -60,13 +81,18 @@ export default class ItemTabs extends Component {
                     />
                 </div>
                 {
-                    this.props.selectedItem.etsy_listing_id &&
+                    this.props.selectedItem.etsy_listing_id > 0 &&
                     <div className={classnames({
                         'hide': (this.state.index !== 1)
                     })}>
                         <ItemEtsyFormWrapper etsyItemId={this.props.selectedItem.etsy_listing_id}/>
                     </div>
                 }
+                <div className={classnames({
+                    'hide': (this.state.index !== 2)
+                })}>
+                    Instagram yeah man
+                </div>
             </div>
         );
     }

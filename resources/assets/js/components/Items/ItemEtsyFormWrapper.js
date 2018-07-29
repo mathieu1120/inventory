@@ -41,6 +41,7 @@ class ItemEtsyFormWrapper extends Component {
                         item={item.results[0]}
                         initialValues={{
                             ...item.results[0],
+                            sku: item.results[0].sku.join('\n'),
                             tags: item.results[0].tags.join('\n'),
                             materials: item.results[0].materials.join('\n'),
                             images: images.results.map(image => {

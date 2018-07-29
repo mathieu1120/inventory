@@ -26,6 +26,8 @@ Route::domain('inventory.shoprachaels.com')->group(function () {
 
     Route::get('api/inventory/etsy-items', 'InventoryController@getEtsyItems');
     Route::get('api/inventory/etsy-item/{listingId}', 'InventoryController@getEtsyItem');
+    Route::get('api/inventory/etsy-shipping_templates', 'InventoryController@getEtsyItemShippingTemplates');
+    Route::get('api/inventory/etsy-categories', 'InventoryController@getEtsyItemCategories');
 
     Route::get('api/inventory/items', 'InventoryController@items');
 

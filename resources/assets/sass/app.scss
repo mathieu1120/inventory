@@ -41,8 +41,20 @@
   margin-bottom: 11px;
 }
 
-.list-group-item.loady {
-  text-align: center;
+.list-group-item {
+  .loady {
+    text-align: center;
+  }
+  .img-circle {
+    padding: 0;
+  }
+}
+
+.panel-heading.filter.row {
+  margin: 0;
+  .btn {
+    padding: 0;
+  }
 }
 
 .glyphicon-refresh-animate {

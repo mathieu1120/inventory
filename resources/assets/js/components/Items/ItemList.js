@@ -50,13 +50,13 @@ export default class ItemList extends Component {
                             }
                             onClick={item => this.selectItem(index)}
                         >
-                            <p className="col-md-10">
+                            <span className="col-md-10">
                                 {
                                     !!item.name
                                         ? item.name
                                         : <i>New Item</i>
                                 }
-                            </p>
+                            </span>
                             {
                                 !!item.image_url &&
                                 <img

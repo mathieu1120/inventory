@@ -7117,7 +7117,7 @@ button.list-group-item-danger.active:focus {
 
 .panel-default > .panel-heading {
   color: #333333;
-  background-color: #fff;
+  background-color: #eee;
   border-color: #d3e0e9;
 }
 
@@ -7126,7 +7126,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-default > .panel-heading .badge {
-  color: #fff;
+  color: #eee;
   background-color: #333333;
 }
 
@@ -8386,8 +8386,20 @@ button.close {
   margin-bottom: 11px;
 }
 
-.list-group-item.loady {
+.list-group-item .loady {
   text-align: center;
+}
+
+.list-group-item .img-circle {
+  padding: 0;
+}
+
+.panel-heading.filter.row {
+  margin: 0;
+}
+
+.panel-heading.filter.row .btn {
+  padding: 0;
 }
 
 .glyphicon-refresh-animate {

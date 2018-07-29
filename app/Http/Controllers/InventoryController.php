@@ -35,6 +35,8 @@ class InventoryController extends Controller
     public function items(Request $request, JsonResponse $response) {
         $offset = (int)$request->query('offset', 0);
         $search = explode(' ', $request->query('search', ''));
+        $orderBy = $request->query('orderby', 'name');
+        $orderType = $request->query('ordertype', 'asc');
 
         $query = Item::where('status', 1);
 
@@ -60,7 +62,7 @@ class InventoryController extends Controller
                 'shipping_price',
                 'shipping_at',
                 'etsy_listing_id'])
-            ->orderBy('name')
+            ->orderBy($orderBy, $orderType)
             ->skip($offset)
             ->take(50)
             ->get()
@@ -188,5 +190,39 @@ class InventoryController extends Controller
                 ]
             ])
         ]);
+    }
+
+    public function getEtsyItemShippingTemplates(Request $request, JsonResponse $response) {
+        $consumerKey = config('auth_etsy.consumer_key');
+        $consumerSecret = config('auth_etsy.consumer_secret');
+        $accessToken = config('auth_etsy.access_token');
+        $accessTokenSecret = config('auth_etsy.access_token_secret');
+
+        $userId = 7738069;
+
+        $client = new EtsyClient($consumerKey, $consumerSecret);
+        $client->authorize($accessToken, $accessTokenSecret);
+
+        $api = new EtsyApi($client);
+
+        return $response->setData($api->findAllUserShippingProfiles([
+            'params' => [
+                'user_id' => $userId,
+            ]
+        ]));
+    }
+
+    public function getEtsyItemCategories(Request $request, JsonResponse $response) {
+        $consumerKey = config('auth_etsy.consumer_key');
+        $consumerSecret = config('auth_etsy.consumer_secret');
+        $accessToken = config('auth_etsy.access_token');
+        $accessTokenSecret = config('auth_etsy.access_token_secret');
+
+        $client = new EtsyClient($consumerKey, $consumerSecret);
+        $client->authorize($accessToken, $accessTokenSecret);
+
+        $api = new EtsyApi($client);
+
+        return $response->setData($api->getSellerTaxonomy());
     }
 }
