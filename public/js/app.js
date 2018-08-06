@@ -60525,6 +60525,8 @@ var _ItemTabs2 = _interopRequireDefault(_ItemTabs);
 
 var _reactRedux = __webpack_require__(9);
 
+var _reduxForm = __webpack_require__(42);
+
 var _items = __webpack_require__(109);
 
 var _items2 = __webpack_require__(22);
@@ -60675,7 +60677,8 @@ var ItemRoot = exports.ItemRoot = function (_Component) {
                             onSelectItem: this.onSelectItem,
                             selectedItem: selectedItem,
                             getMoreItems: this.getMoreItems,
-                            loadMore: this.props.nextOffset > 0
+                            loadMore: this.props.nextOffset > 0,
+                            isFormDirty: this.props.currentFormDirty
                         })
                     )
                 ),
@@ -60714,7 +60717,8 @@ ItemRoot.propTypes = {
     getItems: _propTypes2.default.func.isRequired,
     totalItems: _propTypes2.default.number.isRequired,
     loading: _propTypes2.default.bool.isRequired,
-    nextOffset: _propTypes2.default.number.isRequired
+    nextOffset: _propTypes2.default.number.isRequired,
+    currentFormDirty: _propTypes2.default.bool.isRequired
 };
 
 
@@ -60723,7 +60727,8 @@ var mapStateToProps = function mapStateToProps(state) {
         items: (0, _items.getItemsFromState)(state),
         totalItems: (0, _items.getTotalItemsFromState)(state),
         nextOffset: (0, _items.getNextOffsetItemsFromState)(state),
-        loading: (0, _items.getLoadingFromState)(state)
+        loading: (0, _items.getLoadingFromState)(state),
+        currentFormDirty: (0, _reduxForm.isDirty)('item')(state)
     };
 };
 
@@ -60769,6 +60774,10 @@ var _InfiniteScroll = __webpack_require__(335);
 
 var _InfiniteScroll2 = _interopRequireDefault(_InfiniteScroll);
 
+var _ItemModal = __webpack_require__(161);
+
+var _ItemModal2 = _interopRequireDefault(_ItemModal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60780,24 +60789,60 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ItemList = function (_Component) {
     _inherits(ItemList, _Component);
 
-    function ItemList() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function ItemList(props) {
         _classCallCheck(this, ItemList);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (ItemList.__proto__ || Object.getPrototypeOf(ItemList)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ItemList.__proto__ || Object.getPrototypeOf(ItemList)).call.apply(_ref, [this].concat(args))), _this), _this.selectItem = function (index) {
+        _this.onModalClose = function () {
+            _this.setState({
+                modalOpen: false
+            });
+        };
+
+        _this.makeTheActualSelectItem = function (index) {
             _this.props.onSelectItem(index);
-        }, _this.getMoreData = function (cb) {
+        };
+
+        _this.selectItem = function (index) {
+            if (_this.props.isFormDirty) {
+                _this.setState({
+                    modalTitle: 'Unsaved Form',
+                    modalDescription: _react2.default.createElement(
+                        'p',
+                        null,
+                        'You made some change on the form. Do you want to ignore the changes and continue?'
+                    ),
+                    modalButtonText: 'Yes',
+                    modalOpen: true,
+                    modalButtonAction: function modalButtonAction() {
+                        _this.setState({
+                            modalOpen: false
+                        });
+                        _this.makeTheActualSelectItem(index);
+                    }
+                });
+            } else {
+                _this.makeTheActualSelectItem(index);
+            }
+        };
+
+        _this.getMoreData = function (cb) {
             return _this.props.getMoreItems().then(cb);
-        }, _this.shouldFetch = function () {
+        };
+
+        _this.shouldFetch = function () {
             return _this.props.loadMore;
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.state = {
+            modalTitle: '',
+            modalDescription: null,
+            modalButtonText: '',
+            modalOpen: false,
+            modalButtonAction: _this.onModalClose
+        };
+        return _this;
     }
 
     _createClass(ItemList, [{
@@ -60808,6 +60853,16 @@ var ItemList = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'list-group' },
+                _react2.default.createElement(
+                    _ItemModal2.default,
+                    {
+                        title: this.state.modalTitle,
+                        open: this.state.modalOpen,
+                        onClose: this.onModalClose,
+                        buttonText: this.state.modalButtonText,
+                        buttonAction: this.state.modalButtonAction },
+                    this.state.modalDescription
+                ),
                 _react2.default.createElement(
                     _InfiniteScroll2.default,
                     {
@@ -60857,7 +60912,8 @@ ItemList.propTypes = {
     onSelectItem: _propTypes2.default.func.isRequired,
     selectedItem: _propTypes2.default.object.isRequired,
     getMoreItems: _propTypes2.default.func.isRequired,
-    loadMore: _propTypes2.default.bool.isRequired
+    loadMore: _propTypes2.default.bool.isRequired,
+    isFormDirty: _propTypes2.default.bool.isRequired
 };
 exports.default = ItemList;
 

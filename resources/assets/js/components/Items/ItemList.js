@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import InfiniteScroll from './InfiniteScroll';
+import ItemModal from './ItemModal';
 
 export default class ItemList extends Component {
     static propTypes = {
@@ -9,11 +10,49 @@ export default class ItemList extends Component {
         onSelectItem: PropTypes.func.isRequired,
         selectedItem: PropTypes.object.isRequired,
         getMoreItems: PropTypes.func.isRequired,
-        loadMore: PropTypes.bool.isRequired
+        loadMore: PropTypes.bool.isRequired,
+        isFormDirty: PropTypes.bool.isRequired,
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            modalTitle: '',
+            modalDescription: null,
+            modalButtonText: '',
+            modalOpen: false,
+            modalButtonAction: this.onModalClose
+        };
+    }
+
+    onModalClose = () => {
+        this.setState({
+            modalOpen: false
+        });
+    }
+
+    makeTheActualSelectItem = (index) => {
+        this.props.onSelectItem(index);
     }
 
     selectItem = (index) => {
-        this.props.onSelectItem(index);
+        if (this.props.isFormDirty) {
+            this.setState({
+                modalTitle: 'Unsaved Form',
+                modalDescription: <p>You made some change on the form. Do you want to ignore the changes and continue?</p>,
+                modalButtonText: 'Yes',
+                modalOpen: true,
+                modalButtonAction: () => {
+                    this.setState({
+                        modalOpen: false
+                    });
+                    this.makeTheActualSelectItem(index);
+                }
+            });
+        } else {
+            this.makeTheActualSelectItem(index);
+        }
     }
 
     getMoreData = (cb) => {
@@ -27,6 +66,14 @@ export default class ItemList extends Component {
     render() {
         return (
             <div className="list-group">
+                <ItemModal
+                    title={this.state.modalTitle}
+                    open={this.state.modalOpen}
+                    onClose={this.onModalClose}
+                    buttonText={this.state.modalButtonText}
+                    buttonAction={this.state.modalButtonAction}>
+                    {this.state.modalDescription}
+                </ItemModal>
                 <InfiniteScroll
                     isTableRowChildren={true}
                     onScrollBottom={this.getMoreData}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ItemList from './ItemList';
 import ItemTabs from './ItemTabs';
 import {connect} from 'react-redux';
+import {isDirty} from 'redux-form';
 import {
     getItemsFromState,
     getTotalItemsFromState,
@@ -19,7 +20,8 @@ export class ItemRoot extends Component {
         getItems: PropTypes.func.isRequired,
         totalItems: PropTypes.number.isRequired,
         loading: PropTypes.bool.isRequired,
-        nextOffset: PropTypes.number.isRequired
+        nextOffset: PropTypes.number.isRequired,
+        currentFormDirty: PropTypes.bool.isRequired
     }
 
     constructor(props) {
@@ -138,6 +140,7 @@ export class ItemRoot extends Component {
                             selectedItem={selectedItem}
                             getMoreItems={this.getMoreItems}
                             loadMore={this.props.nextOffset > 0}
+                            isFormDirty={this.props.currentFormDirty}
                         />
                     </div>
                 </div>
@@ -172,7 +175,8 @@ const mapStateToProps = (state) => {
         items: getItemsFromState(state),
         totalItems: getTotalItemsFromState(state),
         nextOffset: getNextOffsetItemsFromState(state),
-        loading: getLoadingFromState(state)
+        loading: getLoadingFromState(state),
+        currentFormDirty: isDirty('item')(state)
     };
 }
 

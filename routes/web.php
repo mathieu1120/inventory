@@ -19,6 +19,12 @@ Route::domain('www.shoprachaels.com')->group(function () {
     });
 });
 
+Route::domain('shoprachaels.com')->group(function () {
+    Route::get('/', function () {
+        return redirect('list');
+    });
+});
+
 Route::domain('inventory.shoprachaels.com')->group(function () {
 
     Route::get('/', 'InventoryController@index');
