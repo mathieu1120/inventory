@@ -88,7 +88,7 @@ export class ItemRoot extends Component {
         this.setState({
             search: event.target.value
         })
-        return this.props.getItems(event.target.value, this.props.nextOffset, this.state.orderBy, this.state.orderType);
+        return this.props.getItems(event.target.value, 0, this.state.orderBy, this.state.orderType);
     }
 
     render() {
