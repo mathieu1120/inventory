@@ -8396,6 +8396,7 @@ button.close {
 
 .panel-heading.filter.row {
   margin: 0;
+  margin: 0;
 }
 
 .panel-heading.filter.row .btn {
@@ -8460,10 +8461,34 @@ button.close {
 }
 
 .list-group {
-  height: 600px;
+  height: 500px;
   overflow: scroll;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+@media (min-height: 0px) {
+  .list-group {
+    height: 100px;
+  }
+}
+
+@media (min-height: 500px) {
+  .list-group {
+    height: 200px;
+  }
+}
+
+@media (min-height: 700px) {
+  .list-group {
+    height: 300px;
+  }
+}
+
+@media (min-height: 768px) {
+  .list-group {
+    height: 500px;
+  }
 }
 
 .upload-image input {
@@ -8517,6 +8542,10 @@ button.close {
   opacity: 0.7;
 }
 
+.add_new_item_wrapper {
+  text-align: right;
+}
+
 .add_new_item_wrapper .badge {
   background-color: #2ab27b;
   cursor: pointer;
@@ -8528,5 +8557,9 @@ button.close {
 
 .hide {
   display: none;
+}
+
+.list_order_by {
+  text-align: right;
 }
 

@@ -52,6 +52,7 @@
 
 .panel-heading.filter.row {
   margin: 0;
+  margin: 0;
   .btn {
     padding: 0;
   }
@@ -88,10 +89,34 @@
 }
 
 .list-group {
-  height: 600px;
+  height: 500px;
   overflow: scroll;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+@media (min-height: 0px) {
+  .list-group {
+    height: 100px;
+  }
+}
+
+@media (min-height: 500px) {
+  .list-group {
+    height: 200px;
+  }
+}
+
+@media (min-height: 700px) {
+  .list-group {
+    height: 300px;
+  }
+}
+
+@media (min-height: 768px) {
+  .list-group {
+    height: 500px;
+  }
 }
 
 .upload-image {
@@ -140,6 +165,7 @@
 }
 
 .add_new_item_wrapper {
+  text-align: right;
   .badge {
     background-color: $brand-success;
     cursor: pointer;
@@ -152,4 +178,8 @@
 
 .hide {
   display: none;
+}
+
+.list_order_by {
+  text-align: right;
 }

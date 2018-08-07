@@ -11,7 +11,7 @@ export default class ItemList extends Component {
     render() {
         return (
             <div className="panel-heading filter row">
-                <div className="dropdown col-md-10">
+                <div className="dropdown col-xs-10">
                     <button className="btn btn-link btn-sm dropdown-toggle" type="button" id="dropdownMenuType"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         {this.props.orderBy} <span className="caret"></span>
@@ -21,7 +21,7 @@ export default class ItemList extends Component {
                         <li><a href="#" onClick={() => this.props.getItems('created_at', this.props.orderType)}>Created</a></li>
                     </ul>
                 </div>
-                <div className="dropdown col-md-2">
+                <div className="dropdown col-xs-2 list_order_by">
                     <button className="btn btn-link btn-sm dropdown-toggle" type="button" id="dropdownMenuOrder"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         {this.props.orderType} <span className="caret"></span>

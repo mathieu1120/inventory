@@ -112,12 +112,12 @@ export class ItemRoot extends Component {
                                     placeholder="Search..."/>
                             </div>
                             <div className="row">
-                                <p className="col-md-10">{this.state.items.length} / {this.props.totalItems} Items</p>
+                                <p className="col-xs-10">{this.state.items.length} / {this.props.totalItems} Items</p>
                                 {
                                     !!this.state.items[0] &&
                                     this.state.items[0].id &&
                                     !this.state.search &&
-                                    <div className="col-md-2 add_new_item_wrapper">
+                                    <div className="col-xs-2 add_new_item_wrapper">
                                         <span className="badge" onClick={this.createNewItem}>
                                             <span
                                                 className="glyphicon glyphicon-plus">

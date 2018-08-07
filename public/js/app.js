@@ -60646,7 +60646,7 @@ var ItemRoot = exports.ItemRoot = function (_Component) {
                             { className: 'row' },
                             _react2.default.createElement(
                                 'p',
-                                { className: 'col-md-10' },
+                                { className: 'col-xs-10' },
                                 this.state.items.length,
                                 ' / ',
                                 this.props.totalItems,
@@ -60654,7 +60654,7 @@ var ItemRoot = exports.ItemRoot = function (_Component) {
                             ),
                             !!this.state.items[0] && this.state.items[0].id && !this.state.search && _react2.default.createElement(
                                 'div',
-                                { className: 'col-md-2 add_new_item_wrapper' },
+                                { className: 'col-xs-2 add_new_item_wrapper' },
                                 _react2.default.createElement(
                                     'span',
                                     { className: 'badge', onClick: this.createNewItem },
@@ -60886,7 +60886,7 @@ var ItemList = function (_Component) {
                             },
                             _react2.default.createElement(
                                 'span',
-                                { className: 'col-md-10' },
+                                { className: 'col-xs-10' },
                                 !!item.name ? item.name : _react2.default.createElement(
                                     'i',
                                     null,
@@ -60895,7 +60895,7 @@ var ItemList = function (_Component) {
                             ),
                             !!item.image_url && _react2.default.createElement('img', {
                                 src: item.image_url,
-                                className: 'img-circle col-md-2 pull-right'
+                                className: 'img-circle col-xs-2 pull-right'
                             })
                         );
                     })
@@ -76994,7 +76994,7 @@ var ItemList = function (_Component) {
                 { className: 'panel-heading filter row' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'dropdown col-md-10' },
+                    { className: 'dropdown col-xs-10' },
                     _react2.default.createElement(
                         'button',
                         { className: 'btn btn-link btn-sm dropdown-toggle', type: 'button', id: 'dropdownMenuType',
@@ -77032,7 +77032,7 @@ var ItemList = function (_Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'dropdown col-md-2' },
+                    { className: 'dropdown col-xs-2 list_order_by' },
                     _react2.default.createElement(
                         'button',
                         { className: 'btn btn-link btn-sm dropdown-toggle', type: 'button', id: 'dropdownMenuOrder',

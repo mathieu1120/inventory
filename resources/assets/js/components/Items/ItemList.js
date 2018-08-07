@@ -97,7 +97,7 @@ export default class ItemList extends Component {
                             }
                             onClick={item => this.selectItem(index)}
                         >
-                            <span className="col-md-10">
+                            <span className="col-xs-10">
                                 {
                                     !!item.name
                                         ? item.name
@@ -108,7 +108,7 @@ export default class ItemList extends Component {
                                 !!item.image_url &&
                                 <img
                                     src={item.image_url}
-                                    className="img-circle col-md-2 pull-right"
+                                    className="img-circle col-xs-2 pull-right"
                                 />
                             }
                         </a>
