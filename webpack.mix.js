@@ -13,3 +13,6 @@ let mix = require('laravel-mix');
 
 mix.react('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.react('resources/assets/js/shop.js', 'public/js')
+    .sass('resources/assets/sass/shop.scss', 'public/css');
