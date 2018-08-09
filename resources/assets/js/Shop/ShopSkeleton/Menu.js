@@ -5,8 +5,12 @@ export default class Menu extends Component {
         return (
             <div className="shop-menu">
                 <ul className="nav nav-pills nav-stacked">
-                    <li role="presentation" className="active">
-                        <img alt="logo"/>
+                    <li role="presentation" className="col-md-9">
+                        <img
+                            className="img-circle img-responsive"
+                            alt="logo"
+                            src="http://inventory.shoprachaels.com/storage/shop/logo.jpg"
+                        />
                         <h1>Rachael's</h1>
                     </li>
                     <li role="presentation"><a href="#">Info</a></li>

@@ -28,6 +28,10 @@ Route::domain('shoprachaels.com')->group(function () {
 
 Route::domain('shop.shoprachaels.com')->group(function () {
     Route::get('/', 'ShopController@index');
+    Route::get('/items/{itemName}', 'ShopController@index');
+    Route::get('/cart', 'ShopController@index');
+
+    Route::get('api/shop/items', 'ShopController@items');
 });
 
 Route::domain('inventory.shoprachaels.com')->group(function () {

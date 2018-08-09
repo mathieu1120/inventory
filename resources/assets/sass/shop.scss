@@ -11,3 +11,19 @@
 body {
   background-color: #f5e9db;
 }
+
+.shop-cart {
+  float: right;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  .btn {
+    border-radius: 23px;
+    .glyphicon {
+      line-height: inherit;
+    }
+  }
+}
+
+.shop-menu {
+
+}
