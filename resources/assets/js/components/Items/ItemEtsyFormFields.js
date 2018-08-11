@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ItemImageInput from './ItemImageInput';
 import {Field, FieldArray} from 'redux-form';
+import FormFields from '../Shared/FormFields';
 
 export default class ItemEtsyFormFields extends Component {
 
@@ -176,46 +177,6 @@ export default class ItemEtsyFormFields extends Component {
         ]
     }
 
-    renderFormFields = () => {
-        return this.getListOfFields().map((field, index) => {
-            return (
-                !!field.type && field.type === 'hidden'
-                    ? <Field
-                        key={index}
-                        parse={!!field.parse ? value => field.parse(value) : null }
-                        name={field.name}
-                        component="input"
-                        type="hidden"/>
-                    : <div key={index} className="form-group">
-                        <label htmlFor={`inputEtsy${field.name}`}
-                               className="col-sm-3 control-label">
-                            {!!field.label ? field.label : field.name.charAt(0).toUpperCase() + field.name.slice(1).split('_').join(' ')}
-                        </label>
-                        <div className="col-sm-9">
-                            <Field
-                                parse={!!field.parse ? value => field.parse(value) : null }
-                                className="form-control"
-                                id={`inputEtsy${field.name}`}
-                                name={field.name}
-                                component={!!field.component ? field.component : 'input'}
-                                type={!!field.type ? field.type : 'text'}
-                                props={!!field.props ? field.props : null}
-                            >
-                                {
-                                    !!field.options
-                                        ?
-                                        field.options.map((option, index) => {
-                                            return (<option key={index} value={option}>{option}</option>);
-                                        })
-                                        : null
-                                }
-                            </Field>
-                        </div>
-                    </div>
-            );
-        });
-    }
-
     renderImages = ({fields}) => {
         return (
             <div>
@@ -244,7 +205,7 @@ export default class ItemEtsyFormFields extends Component {
         return (
             <div className="panel panel-default">
                 <div className="col-md-8">
-                    {this.renderFormFields()}
+                    <FormFields fields={this.getListOfFields()} formName={this.props.form} />
                 </div>
                 <div className="col-md-4">
                     <FieldArray

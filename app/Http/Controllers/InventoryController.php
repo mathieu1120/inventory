@@ -61,7 +61,8 @@ class InventoryController extends Controller
                 'shipping_cost',
                 'shipping_price',
                 'shipping_at',
-                'etsy_listing_id'])
+                'etsy_listing_id',
+                'shop_product_id',])
             ->orderBy($orderBy, $orderType)
             ->skip($offset)
             ->take(50)
@@ -224,5 +225,26 @@ class InventoryController extends Controller
         $api = new EtsyApi($client);
 
         return $response->setData($api->getSellerTaxonomy());
+    }
+
+    public function getRachaelsProduct(Request $request, JsonResponse $response, $productId) {
+
+        return $response->setData([
+            'product' => [
+                'results' => [
+                    [
+                        'id' => 0,
+                        'name' => 'lol'
+                    ]
+                ]
+            ],
+            'images' => [
+                'results' => [
+                    [
+                        'url' => 'haha'
+                    ]
+                ]
+            ]
+        ]);
     }
 }

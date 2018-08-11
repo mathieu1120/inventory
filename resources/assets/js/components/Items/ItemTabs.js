@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import ItemFormWrapper from './ItemFormWrapper';
 import ItemEtsyFormWrapper from './ItemEtsyFormWrapper';
+import RachaelsFormWrapper from './RachaelsFormWrapper';
 
 export default class ItemTabs extends Component {
     static propTypes = {
@@ -27,50 +28,32 @@ export default class ItemTabs extends Component {
     }
 
     render() {
+        const tabs = [
+            {name: 'Item'},
+            {name: 'Etsy'},
+            {name: 'Rachael\'s'},
+            {name: 'Instagram'}
+        ];
+
         return (
             <div>
                 <ul className="nav nav-pills">
-                    <li
-                        className={
-                            classnames({
-                                "active": (this.state.index === 0)
-                            })}
-                        onClick={() => this.setState({
-                            index: 0
-                        })}
-                    >
-                        <a href="#">
-                            Item
-                        </a>
-                    </li>
-                    {
-                        this.props.selectedItem.etsy_listing_id > 0 &&
-                        <li className={
-                            classnames({
-                                "active": (this.state.index === 1)
-                            })}
+                    {tabs.map((tab, index) => (
+                        <li
+                            key={index}
+                            className={
+                                classnames({
+                                    "active": (this.state.index === {index})
+                                })}
                             onClick={() => this.setState({
-                                index: 1
+                                index: index
                             })}
                         >
                             <a href="#">
-                                Etsy
+                                {tab.name}
                             </a>
                         </li>
-                    }
-                    <li
-                        className={
-                            classnames({
-                                "active": (this.state.index === 2)
-                            })}
-                        onClick={() => this.setState({
-                            index: 2
-                        })}
-                    >
-                        <a href="#">
-                            Instagram
-                        </a>
-                    </li>
+                    ))}
                 </ul>
                 <div className={classnames({
                     'hide': (this.state.index !== 0)
@@ -80,16 +63,22 @@ export default class ItemTabs extends Component {
                         deleteNewItem={this.props.deleteNewItem}
                     />
                 </div>
-                {
-                    this.props.selectedItem.etsy_listing_id > 0 &&
-                    <div className={classnames({
-                        'hide': (this.state.index !== 1)
-                    })}>
-                        <ItemEtsyFormWrapper etsyItemId={this.props.selectedItem.etsy_listing_id}/>
-                    </div>
-                }
+                <div className={classnames({
+                    'hide': (this.state.index !== 1)
+                })}>
+                    <ItemEtsyFormWrapper
+                        selectedItem={this.props.selectedItem}
+                    />
+                </div>
                 <div className={classnames({
                     'hide': (this.state.index !== 2)
+                })}>
+                    <RachaelsFormWrapper
+                        selectedItem={this.props.selectedItem}
+                    />
+                </div>
+                <div className={classnames({
+                    'hide': (this.state.index !== 3)
                 })}>
                     Instagram yeah man
                 </div>

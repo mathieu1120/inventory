@@ -4,7 +4,11 @@ import {
 
 import {
     ETSY_ACTION
-} from '../../../actions/inventory/etsy'
+} from '../../../actions/inventory/etsy';
+
+import {
+    RACHAELS_ACTION
+} from '../../../actions/inventory/rachaels';
 
 const metaItemsState = {
     loading: false,
@@ -12,7 +16,8 @@ const metaItemsState = {
     next_offset: 0,
     loading_item_image_upload: false,
     loading_etsy_search: false,
-    loading_etsy_form: false
+    loading_etsy_form: false,
+    loading_rachaels_form: false,
 };
 
 export default function metaItems(state = metaItemsState, action) {

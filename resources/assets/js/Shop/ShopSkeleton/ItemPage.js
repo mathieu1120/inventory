@@ -21,23 +21,38 @@ class ItemPage extends Component {
     }
 
     render() {
+        const {
+            item,
+            id
+        } = this.props;
+
         return (
-            this.props.item &&
-            <div className="row">
-                <img
-                    src={item.image_url ? item.image_url : 'http://shop.shoprachaels.com/storage/violette.jpg'}
-                    alt={item.name}/>
-                <p>{item.name}</p>
-                <p>{item.description}</p>
-                <p>{item.details}</p>
-                <button className="btn">Add to card</button>
-            </div>
+            !!item.id && item.id === Number(id) ?
+                <div className="row">
+                    <div className="col-md-4">
+                        <img
+                            className="img-responsive"
+                            src={item.image_url ? item.image_url : 'http://shop.shoprachaels.com/storage/violette.jpg'}
+                            alt={item.name}/>
+                    </div>
+                    <div className="col-md-8">
+                        <h2>{item.name}</h2>
+                        <p>{item.description}</p>
+                        <p>{item.details}</p>
+                        <button className="btn">Add to card</button>
+                    </div>
+                </div>
+                :
+                <div>
+                    loading...
+                </div>
         );
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownprops) => {
     return {
+        id: ownprops.match.params.id,
         item: getItemFromState(state),
         loading: getLoadingFromState(state),
     };

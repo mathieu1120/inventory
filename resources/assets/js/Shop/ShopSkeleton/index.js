@@ -20,7 +20,7 @@ export default class ShopSkeleton extends Component {
                         </div>
                         <div className="col-lg-10">
                             <Route exact path="/" component={Items}/>
-                            <Route path="/items/*" component={ItemPage}/>
+                            <Route path="/items/:id" component={ItemPage}/>
                             <Route exact path="/cart" component={Cart}/>
                         </div>
                     </div>

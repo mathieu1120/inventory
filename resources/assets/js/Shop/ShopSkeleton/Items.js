@@ -6,7 +6,7 @@ import {
 } from "../../selectors/shop/items";
 import {getItems} from "../../actions/shop/items";
 import PropTypes from "prop-types";
-import { Link, Route, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class Items extends Component {
 
@@ -30,7 +30,7 @@ class Items extends Component {
                 {items.map((item, index) => {
                     return (
                         <div key={index} className="col-xs-12 col-md-2">
-                            <Link to="/items/item-name">
+                            <Link to={`/items/${item.id}`}>
                                 <div className="thumbnail">
                                     <img
                                         src={item.image_url ? item.image_url : 'http://shop.shoprachaels.com/storage/violette.jpg'}

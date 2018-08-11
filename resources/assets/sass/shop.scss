@@ -16,6 +16,9 @@ body {
   float: right;
   margin-top: 15px;
   margin-bottom: 15px;
+  a {
+    color: inherit;
+  }
   .btn {
     border-radius: 23px;
     .glyphicon {
@@ -26,4 +29,17 @@ body {
 
 .shop-menu {
 
+}
+
+.nav {
+  li {
+    a {
+      padding: 0;
+      color: inherit;
+      text-decoration: none;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
 }

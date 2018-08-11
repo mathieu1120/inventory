@@ -8392,6 +8392,7 @@ button.close {
 
 .list-group-item .img-circle {
   padding: 0;
+  max-height: 22px;
 }
 
 .panel-heading.filter.row {

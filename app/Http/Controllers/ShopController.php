@@ -71,4 +71,12 @@ class ShopController extends Controller
 
         return $response->setData($items);
     }
+
+    public function item(Request $request, JsonResponse $response, $id) {
+        $item = Item::find($id);
+
+        return $response->setData(
+            $item->editableFieldsArray()
+        );
+    }
 }

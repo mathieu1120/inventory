@@ -10,20 +10,19 @@ import {getEtsyItem} from '../../actions/inventory/etsy';
 
 class ItemEtsyFormWrapper extends Component {
     static propTypes = {
-        etsyItemId: PropTypes.number.isRequired,
+        selectedItem: PropTypes.object.isRequired,
         item: PropTypes.object.isRequired,
         getEtsyItem: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
     }
 
     componentDidMount = () => {
-        this.props.getEtsyItem(this.props.etsyItemId);
+        this.props.getEtsyItem(this.props.selectedItem.etsy_listing_id);
     }
 
     componentWillReceiveProps = (nextProps, nextState) => {
-        if (this.props.etsyItemId !== nextProps.etsyItemId) {
-            console.log('done');
-            this.props.getEtsyItem(nextProps.etsyItemId);
+        if (this.props.selectedItem.etsy_listing_id !== nextProps.selectedItem.etsy_listing_id) {
+            this.props.getEtsyItem(nextProps.selectedItem.etsy_listing_id);
         }
     }
 
@@ -36,7 +35,7 @@ class ItemEtsyFormWrapper extends Component {
         return (
             <div>
                 {
-                    this.props.etsyItemId && !!item && !!item.results &&
+                    this.props.selectedItem.etsy_listing_id && !!item && !!item.results &&
                     <ItemEtsyForm
                         item={item.results[0]}
                         initialValues={{
@@ -46,7 +45,8 @@ class ItemEtsyFormWrapper extends Component {
                             materials: item.results[0].materials.join('\n'),
                             images: images.results.map(image => {
                                 return {image_url: image['url_fullxfull']};
-                            })
+                            }),
+                            item_id: this.props.selectedItem.id
                         }}
                         form={`etsyItem`}
                     />

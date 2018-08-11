@@ -28,10 +28,11 @@ Route::domain('shoprachaels.com')->group(function () {
 
 Route::domain('shop.shoprachaels.com')->group(function () {
     Route::get('/', 'ShopController@index');
-    Route::get('/items/{itemName}', 'ShopController@index');
+    Route::get('/items/{id}', 'ShopController@index');
     Route::get('/cart', 'ShopController@index');
 
     Route::get('api/shop/items', 'ShopController@items');
+    Route::get('api/shop/items/{id}', 'ShopController@item');
 });
 
 Route::domain('inventory.shoprachaels.com')->group(function () {
@@ -43,6 +44,8 @@ Route::domain('inventory.shoprachaels.com')->group(function () {
     Route::get('api/inventory/etsy-item/{listingId}', 'InventoryController@getEtsyItem');
     Route::get('api/inventory/etsy-shipping_templates', 'InventoryController@getEtsyItemShippingTemplates');
     Route::get('api/inventory/etsy-categories', 'InventoryController@getEtsyItemCategories');
+
+    Route::get('api/inventory/rachaels-item/{productId}', 'InventoryController@getRachaelsProduct');
 
     Route::get('api/inventory/items', 'InventoryController@items');
 
