@@ -14,7 +14,7 @@ class AddImageUrlToItem extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
         });
     }
 

@@ -100,7 +100,7 @@ export class ItemRoot extends Component {
 
         return (
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-sm-3">
                     {
                         (this.state.items.length > 0 || this.state.search) &&
                         <div className="container-fluid">
@@ -112,12 +112,12 @@ export class ItemRoot extends Component {
                                     placeholder="Search..."/>
                             </div>
                             <div className="row">
-                                <p className="col-xs-10">{this.state.items.length} / {this.props.totalItems} Items</p>
+                                <p className="col-xs-10 col-sm-9">{this.state.items.length} / {this.props.totalItems} Items</p>
                                 {
                                     !!this.state.items[0] &&
                                     this.state.items[0].id &&
                                     !this.state.search &&
-                                    <div className="col-xs-2 add_new_item_wrapper">
+                                    <div className="col-xs-2 col-sm-2 add_new_item_wrapper">
                                         <span className="badge" onClick={this.createNewItem}>
                                             <span
                                                 className="glyphicon glyphicon-plus">
@@ -144,7 +144,7 @@ export class ItemRoot extends Component {
                         />
                     </div>
                 </div>
-                <div className="col-md-9">
+                <div className="col-sm-9">
                     {
                         this.state.items.length > 0 &&
                         <div>
@@ -184,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getItems: (search, offset, orderBy = 'name', orderType = 'asc') => {
             return dispatch(getItems(search, offset, orderBy, orderType));
-        }
+        },
     };
 }
 

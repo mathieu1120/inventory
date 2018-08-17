@@ -17,7 +17,9 @@ class ItemEtsyFormWrapper extends Component {
     }
 
     componentDidMount = () => {
-        this.props.getEtsyItem(this.props.selectedItem.etsy_listing_id);
+        if (!!this.props.selectedItem.etsy_listing_id) {
+            this.props.getEtsyItem(this.props.selectedItem.etsy_listing_id);
+        }
     }
 
     componentWillReceiveProps = (nextProps, nextState) => {

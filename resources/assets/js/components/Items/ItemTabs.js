@@ -43,7 +43,7 @@ export default class ItemTabs extends Component {
                             key={index}
                             className={
                                 classnames({
-                                    "active": (this.state.index === {index})
+                                    "active": (this.state.index === index)
                                 })}
                             onClick={() => this.setState({
                                 index: index

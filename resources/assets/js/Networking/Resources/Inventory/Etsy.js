@@ -11,6 +11,6 @@ export default class Etsy extends AbstractResource {
     }
 
     getItem(id) {
-        return this.get(`etsy-item/${id}`);
+        return this.get(`etsy-items/${id}`);
     }
 }

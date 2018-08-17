@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InventoryItemEditRequest;
+use App\Http\Requests\InventoryShopProductEditRequest;
 use App\Item;
+use App\ShopCategories;
+use App\ShopProduct;
+use App\ShopProductMedia;
 use Etsy\EtsyApi;
 use Etsy\EtsyClient;
 use Illuminate\Http\JsonResponse;
@@ -227,24 +231,92 @@ class InventoryController extends Controller
         return $response->setData($api->getSellerTaxonomy());
     }
 
+    public function getRachaelsCategories(Request $request, JsonResponse $response, $parentCategoryId) {
+        /**
+         * @var ShopProduct $shopProduct
+         */
+        $shopCategories = ShopCategories::with('categories')
+            ->where('status', 1)
+            ->where('id_category', $parentCategoryId)
+            ->get()->toArray();
+        return $response->setData([
+            'categories' => $shopCategories
+        ]);
+    }
+
     public function getRachaelsProduct(Request $request, JsonResponse $response, $productId) {
+        /**
+         * @var ShopProduct $shopProduct
+         */
+        $shopProduct = ShopProduct::with('shopProductMedia')->find($productId);
+        return $response->setData([
+            'product' => !empty($shopProduct) ? $shopProduct->toArray() : null
+        ]);
+    }
+
+    public function createRachaelsProduct(InventoryShopProductEditRequest $request, JsonResponse $response) {
+        $data = $request->all();
+        $images = $request->post('shop_product_media');
+        unset($data['shop_product_media']);
+        unset($data['item_id']);
+
+        $item = Item::find($request->post('item_id'));
+
+        $shopProduct = ShopProduct::create($data);
+        $item->update(['shop_product_id' => $shopProduct->id]);
+
+        if (!empty($images) && !empty($images[0])) {
+            $shopProduct->shopProductMedia()->createMany($images);
+        }
+        $shopProduct = ShopProduct::with('shopProductMedia')->find($shopProduct->id);
 
         return $response->setData([
-            'product' => [
-                'results' => [
-                    [
-                        'id' => 0,
-                        'name' => 'lol'
-                    ]
-                ]
-            ],
-            'images' => [
-                'results' => [
-                    [
-                        'url' => 'haha'
-                    ]
-                ]
-            ]
+            'product' => $shopProduct->toArray()
+        ]);
+    }
+
+    public function editRachaelsProduct(InventoryShopProductEditRequest $request, JsonResponse $response, $productId) {
+        $data = $request->all();
+        $images = $request->post('shop_product_media');
+        unset($data['shop_product_media']);
+        unset($data['item_id']);
+
+        $newImages = [];
+        foreach ($images as $image) {
+            if (!empty($image['id'])) {
+                ShopProductMedia::where('id', $image['id'])->update($image);
+            } else if (!empty($image)){
+                $newImages[] = $image;
+            }
+        }
+
+        ShopProduct::where('id', $productId)
+            ->update($data);
+
+        $shopProduct = ShopProduct::with('shopProductMedia')->find($productId);
+        if ($newImages) {
+            $shopProduct->shopProductMedia()->createMany($newImages);
+            $shopProduct = ShopProduct::with('shopProductMedia')->find($productId);
+        }
+        return $response->setData([
+            'product' => $shopProduct->toArray()
+        ]);
+    }
+
+    public function addRachaelsCategory(Request $request, JsonResponse $response, $parentCategoryId) {
+        $name = $request->post('newCategory');
+
+        ShopCategories::create([
+            'id_category' => (int)$parentCategoryId,
+            'name'        => $name
+        ]);
+
+        $shopCategories = ShopCategories::with('categories')
+            ->where('status', 1)
+            ->where('id_category', $parentCategoryId)
+            ->get()->toArray();
+        return $response->setData([
+            'categories' => $shopCategories
         ]);
     }
 }

@@ -8468,25 +8468,7 @@ button.close {
   padding-right: 15px;
 }
 
-@media (min-height: 0px) {
-  .list-group {
-    height: 100px;
-  }
-}
-
-@media (min-height: 500px) {
-  .list-group {
-    height: 200px;
-  }
-}
-
-@media (min-height: 700px) {
-  .list-group {
-    height: 300px;
-  }
-}
-
-@media (min-height: 768px) {
+@media (max-width: 768px) {
   .list-group {
     height: 500px;
   }

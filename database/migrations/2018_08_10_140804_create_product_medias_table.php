@@ -17,8 +17,8 @@ class CreateProductMediasTable extends Migration
             $table->increments('id');
             $table->integer('id_product');
             $table->string('url');
-            $table->integer('type');
-            $table->boolean('status');
+            $table->integer('type')->default(1);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

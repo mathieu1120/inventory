@@ -1,6 +1,7 @@
 import {
     ITEM_ACTION
 } from '../../../actions/inventory/items';
+import {RACHAELS_ACTION} from "../../../actions/inventory/rachaels";
 
 const itemsState = [
 
@@ -41,6 +42,17 @@ export default function items(state = itemsState, action) {
             console.log(action);
             return state.filter((item) => {
                 return item.id !== Number(action.response.soldItemId);
+            });
+        case RACHAELS_ACTION.SAVE_PRODUCT.SUCCESS:
+            console.log(action.response);
+            return state.map((item) => {
+                if (item.id === action.item_id) {
+                    return {
+                        ...item,
+                        shop_product_id: action.response.product.id
+                    };
+                }
+                return item;
             });
         default:
             return state;

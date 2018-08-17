@@ -4,45 +4,45 @@ import RachaelsForm from './RachaelsForm';
 import {connect} from 'react-redux';
 import {
     getProductLoadingFromState,
-    getProductFromState
+    getProductFromState,
 } from '../../selectors/inventory/rachaels';
-import {getProduct} from '../../actions/inventory/rachaels';
+import {
+    getProduct,
+} from '../../actions/inventory/rachaels';
 
 class RachaelsFormWrapper extends Component {
     static propTypes = {
         selectedItem: PropTypes.object.isRequired,
-        product: PropTypes.object.isRequired,
+        product: PropTypes.object,
         loading: PropTypes.bool.isRequired,
         getRachaelsProduct: PropTypes.func.isRequired,
     }
 
     componentDidMount = () => {
-        this.props.getRachaelsProduct(this.props.selectedItem.productId);
+        this.props.getRachaelsProduct(this.props.selectedItem.shop_product_id);
     }
 
     componentWillReceiveProps = (nextProps, nextState) => {
-        if (this.props.selectedItem.productId !== nextProps.selectedItem.productId) {
-            this.props.getRachaelsProduct(nextProps.selectedItem.productId);
+        console.log('gotta stop requesting in here after creating a new product');
+        if (this.props.selectedItem.shop_product_id !== nextProps.selectedItem.shop_product_id) {
+            this.props.getRachaelsProduct(nextProps.selectedItem.shop_product_id);
         }
     }
 
     render() {
         const {
-            images,
             product
         } = this.props.product;
 
         return (
             <div>
                 {
-                    !!product && !!product.results &&
                     <RachaelsForm
-                        product={product.results[0]}
+                        product={product}
                         initialValues={{
-                            ...product.results[0],
-                            images: images.results.map(image => {
-                                return {image_url: image['url_fullxfull']};
-                            }),
+                            ...product,
+                            shop_product_media: !!product && product.shop_product_media.length > 0 ?
+                                product.shop_product_media : [{}],
                             item_id: this.props.selectedItem.id
                         }}
                         form={`product`}
@@ -67,7 +67,7 @@ class RachaelsFormWrapper extends Component {
 const mapStateToProps = (state) => {
     return {
         product: getProductFromState(state),
-        loading: getProductLoadingFromState(state)
+        loading: getProductLoadingFromState(state),
     };
 }
 
@@ -75,7 +75,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getRachaelsProduct: (id) => {
             return dispatch(getProduct(id));
-        }
+        },
     };
 }
 

@@ -6,6 +6,7 @@ import formErrors from './formErrors';
 import etsySearch from './etsySearch';
 import etsyItem from './etsyItem';
 import rachaelsProduct from './rachaels';
+import rachaelsCategories from './rachaels/categories';
 
 export default combineReducers({
     items,
@@ -15,4 +16,5 @@ export default combineReducers({
     etsySearch,
     etsyItem,
     rachaelsProduct,
+    rachaelsCategories
 })

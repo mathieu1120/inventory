@@ -11,7 +11,7 @@ class RachaelsForm extends Component {
         handleSubmit: PropTypes.func.isRequired,
         pristine: PropTypes.bool.isRequired,
         submitting: PropTypes.bool.isRequired,
-        product: PropTypes.object.isRequired
+        product: PropTypes.object
     }
 
     render() {

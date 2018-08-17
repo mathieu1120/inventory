@@ -97,6 +97,15 @@ class RachaelsFormCTA extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        saveItem: (values) => {
+            dispatch(saveItem(values));
+        },
+        deleteItem: (values) => {
+            dispatch(deleteItem(values));
+        },
+        soldItem: (values) => {
+            dispatch(soldItem(values));
+        }
     };
 };
 

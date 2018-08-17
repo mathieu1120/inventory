@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import ItemImageInput from './ItemImageInput';
 import {Field, FieldArray} from 'redux-form';
 import FormFields from '../Shared/FormFields';
+import SelectCategory from '../Shared/SelectCategory';
 
 export default class RachaelsFormFields extends Component {
 
     static propTypes = {
         form: PropTypes.string.isRequired,
-        product: PropTypes.object.isRequired,
+        product: PropTypes.object,
         change: PropTypes.func.isRequired
     }
 
@@ -19,7 +20,7 @@ export default class RachaelsFormFields extends Component {
     getListOfFields = () => {
         return [
             {
-                name: 'id_product',
+                name: 'id',
                 type: 'hidden'
             },
             {
@@ -43,28 +44,28 @@ export default class RachaelsFormFields extends Component {
                 parse: this.parseNumber
             },
             {
-                name: 'item_weight',
+                name: 'weight',
                 type: 'number',
                 parse: this.parseNumber
             },
             {
-                name: 'item_length',
+                name: 'length',
                 type: 'number',
                 parse: this.parseNumber
             },
             {
-                name: 'item_width',
+                name: 'width',
                 type: 'number',
                 parse: this.parseNumber
             },
             {
-                name: 'item_height',
+                name: 'height',
                 type: 'number',
                 parse: this.parseNumber
             },
             {
-                name: 'category_id',
-                component: 'select'
+                name: 'category',
+                component: SelectCategory
             }
         ]
     }
@@ -75,16 +76,22 @@ export default class RachaelsFormFields extends Component {
                 {
                     fields.map((field, index) => {
                         return (
-                            <Field
-                                key={index}
-                                name={`${field}.image_url`}
-                                props={{
-                                    form: this.props.form,
-                                    name: `${field}.image_url`,
-                                    loading: false
-                                }}
-                                component={ItemImageInput}
-                            />
+                            <div key={index}>
+                                <Field
+                                    name={`${field}.url`}
+                                    props={{
+                                        form: this.props.form,
+                                        name: `${field}.url`,
+                                        loading: false
+                                    }}
+                                    component={ItemImageInput}
+                                />
+                                <Field
+                                    name={`${field}.id`}
+                                    type="hidden"
+                                    component="input"
+                                />
+                            </div>
                         );
                     })
                 }
@@ -101,7 +108,7 @@ export default class RachaelsFormFields extends Component {
                 </div>
                 <div className="col-md-4">
                     <FieldArray
-                        name="images"
+                        name="shop_product_media"
                         component={this.renderImages}
                     />
                 </div>

@@ -16,15 +16,15 @@ class CreateProductTable extends Migration
         Schema::create('shop_products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->double('price');
-            $table->integer('quantity');
-            $table->double('weight');
-            $table->double('length');
-            $table->double('width');
-            $table->double('height');
-            $table->integer('id_category');
-            $table->boolean('status');
+            $table->integer('quantity')->nullable();
+            $table->double('weight')->nullable();
+            $table->double('length')->nullable();
+            $table->double('width')->nullable();
+            $table->double('height')->nullable();
+            $table->integer('id_category')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

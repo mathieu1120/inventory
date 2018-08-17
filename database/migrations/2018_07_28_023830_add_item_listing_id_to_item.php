@@ -14,7 +14,7 @@ class AddItemListingIdToItem extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->integer('etsy_listing_id');
+            $table->integer('etsy_listing_id')->nullable();
         });
     }
 
