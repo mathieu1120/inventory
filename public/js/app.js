@@ -77879,7 +77879,8 @@ var RachaelsFormFields = function (_Component) {
                 type: 'number',
                 parse: _this.parseNumber
             }, {
-                name: 'category',
+                name: 'id_category',
+                label: 'Category',
                 component: _SelectCategory2.default
             }];
         }, _this.renderImages = function (_ref2) {
@@ -77978,6 +77979,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(9);
 
+var _reduxForm = __webpack_require__(41);
+
 var _rachaels = __webpack_require__(104);
 
 var _rachaels2 = __webpack_require__(534);
@@ -77997,6 +78000,35 @@ var SelectCategory = function (_Component) {
         _classCallCheck(this, SelectCategory);
 
         var _this = _possibleConstructorReturn(this, (SelectCategory.__proto__ || Object.getPrototypeOf(SelectCategory)).call(this, props));
+
+        _this.componentWillReceiveProps = function (newProps) {
+            if (!_this.state.fields[0].id) {
+                var initialCategories = {};
+                var fields = [{
+                    parentId: 0,
+                    displayInput: false,
+                    textValue: '',
+                    id: 0
+                }];
+
+                if (!!newProps.categoryTree && newProps.categoryTree.length) {
+                    fields = newProps.categoryTree.map(function (branch) {
+                        initialCategories[branch.category.id_category] = branch.parentBrothers;
+                        return {
+                            parentId: branch.category.id_category,
+                            displayInput: false,
+                            textValue: '',
+                            id: branch.category.id
+                        };
+                    });
+                }
+
+                _this.state = {
+                    fields: fields,
+                    initialCategories: initialCategories
+                };
+            }
+        };
 
         _this.componentDidMount = function () {
             _this.props.getRachaelsCategories();
@@ -78021,6 +78053,33 @@ var SelectCategory = function (_Component) {
             });
         };
 
+        _this.addInput = function (index) {
+            var fields = _this.state.fields;
+            fields.push({
+                parentId: fields[index].id,
+                displayInput: true,
+                textValue: '',
+                id: 0
+            });
+            _this.setState({
+                fields: fields
+            });
+        };
+
+        _this.cancelInput = function (index) {
+            var fields = _this.state.fields;
+
+            if (!!_this.props.categories[fields[index].parentId] || !!_this.state.initialCategories[fields[index].parentId]) {
+                fields[index].displayInput = false;
+                fields[index].textValue = '';
+            } else {
+                fields.pop();
+            }
+            _this.setState({
+                fields: fields
+            });
+        };
+
         _this.addCategory = function (index) {
             var fields = _this.state.fields;
             var parentId = index ? _this.state.fields[index].parentId : 0;
@@ -78039,29 +78098,63 @@ var SelectCategory = function (_Component) {
 
         _this.onDropDownSelect = function (index, event) {
             var fields = _this.state.fields;
+            var value = event.target.value;
 
+            console.log('here');
             if (fields.length > index + 1) {
                 fields.splice(index + 1);
             }
-
-            fields[index].id = event.target.value;
-            fields.push({
-                parentId: event.target.value,
-                displayInput: false,
-                textValue: '',
-                id: 0
-            });
+            if (value) {
+                _this.props.input.onChange(value);
+            } else {
+                _this.props.input.onChange(!!fields[index - 1] ? fields[index - 1].id : null);
+            }
+            fields[index].id = value;
 
             _this.setState({
                 fields: fields
             });
-            if (!_this.props.categories[event.target.value]) {
-                _this.props.getRachaelsCategories(event.target.value);
+            if (!_this.props.categories[value]) {
+                _this.props.getRachaelsCategories(value);
+            }
+        };
+
+        _this.renderCategoryOptions = function (index) {
+            var categories = _this.props.categories;
+            var _this$state = _this.state,
+                fields = _this$state.fields,
+                initialCategories = _this$state.initialCategories;
+
+
+            if (!!categories[fields[index].parentId]) {
+                return categories[fields[index].parentId].map(function (category, i) {
+                    return _react2.default.createElement(
+                        'option',
+                        {
+                            value: category.id,
+                            key: i
+                        },
+                        category.name
+                    );
+                });
+            } else if (!!initialCategories[fields[index].parentId]) {
+                return initialCategories[fields[index].parentId].map(function (category, i) {
+                    return _react2.default.createElement(
+                        'option',
+                        {
+                            value: category.id,
+                            key: i
+                        },
+                        category.name
+                    );
+                });
+            } else {
+                return null;
             }
         };
 
         _this.state = {
-            categories: {},
+            initialCategories: {},
             fields: [{
                 parentId: 0,
                 displayInput: false,
@@ -78077,24 +78170,18 @@ var SelectCategory = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            var categories = this.props.categories;
             var fields = this.state.fields;
 
 
-            var elementArray = [];
-
-            var _loop = function _loop(index) {
-                if (!fields.hasOwnProperty(index)) {
-                    return 'continue';
-                }
-                elementArray.push(fields[index].displayInput ? _react2.default.createElement(
+            var elementArray = fields.map(function (field, index) {
+                return field.displayInput ? _react2.default.createElement(
                     'div',
                     { key: index },
                     _react2.default.createElement('input', { type: 'text', className: 'form-control',
                         onChange: function onChange(event) {
                             return _this2.updateValue(event, index);
                         } }),
-                    _react2.default.createElement(
+                    field.textValue && _react2.default.createElement(
                         'span',
                         {
                             className: 'badge',
@@ -78102,6 +78189,15 @@ var SelectCategory = function (_Component) {
                                 _this2.addCategory(index);
                             } },
                         _react2.default.createElement('span', { className: 'glyphicon glyphicon-ok' })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        {
+                            className: 'badge',
+                            onClick: function onClick() {
+                                _this2.cancelInput(index);
+                            } },
+                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' })
                     )
                 ) : _react2.default.createElement(
                     'div',
@@ -78113,25 +78209,25 @@ var SelectCategory = function (_Component) {
                             onChange: function onChange(event) {
                                 return _this2.onDropDownSelect(Number(index), event);
                             },
-                            defaultValue: _this2.state.fields[index].id
+                            value: field.id
                         },
                         _react2.default.createElement(
                             'option',
-                            null,
+                            { value: 0 },
                             'Choose'
                         ),
-                        !!categories[fields[index].parentId] && categories[fields[index].parentId].map(function (category, i) {
-                            return _react2.default.createElement(
-                                'option',
-                                {
-                                    value: category.id,
-                                    key: i
-                                },
-                                category.name
-                            );
-                        })
+                        _this2.renderCategoryOptions(index)
                     ),
-                    !!_this2.state.fields[index].id ? null : _react2.default.createElement(
+                    index + 1 === fields.length && Number(field.id) !== 0 && _react2.default.createElement(
+                        'span',
+                        {
+                            className: 'badge',
+                            onClick: function onClick() {
+                                _this2.addInput(index);
+                            } },
+                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-plus' })
+                    ),
+                    index + 1 === fields.length && Number(field.id) === 0 && _react2.default.createElement(
                         'span',
                         {
                             className: 'badge',
@@ -78140,14 +78236,8 @@ var SelectCategory = function (_Component) {
                             } },
                         _react2.default.createElement('span', { className: 'glyphicon glyphicon-plus' })
                     )
-                ));
-            };
-
-            for (var index in fields) {
-                var _ret = _loop(index);
-
-                if (_ret === 'continue') continue;
-            }
+                );
+            });
 
             return _react2.default.createElement(
                 'div',
@@ -78163,13 +78253,18 @@ var SelectCategory = function (_Component) {
 SelectCategory.propTypes = {
     addCategory: _propTypes2.default.func.isRequired,
     categories: _propTypes2.default.object.isRequired,
-    getRachaelsCategories: _propTypes2.default.func.isRequired
+    getRachaelsCategories: _propTypes2.default.func.isRequired,
+    input: _propTypes2.default.object.isRequired,
+    categoryTree: _propTypes2.default.array
 };
 
 
+var selector = (0, _reduxForm.formValueSelector)('product');
+
 var mapStateToProps = function mapStateToProps(state) {
     return {
-        categories: (0, _rachaels2.getCategoriesFromState)(state)
+        categories: (0, _rachaels2.getCategoriesFromState)(state),
+        categoryTree: selector(state, 'category_tree')
     };
 };
 

@@ -249,8 +249,18 @@ class InventoryController extends Controller
          * @var ShopProduct $shopProduct
          */
         $shopProduct = ShopProduct::with('shopProductMedia')->find($productId);
+        /**
+         * @var ShopCategories $shopCategory
+         */
+        $shopCategory = ShopCategories::find($shopProduct->id_category);
+        $product = null;
+        if (!empty($shopProduct)) {
+            $product = $shopProduct->toArray();
+            $product['category_tree'] = $shopCategory->getBigTreeToCategory();
+        }
+
         return $response->setData([
-            'product' => !empty($shopProduct) ? $shopProduct->toArray() : null
+            'product' => $product
         ]);
     }
 
@@ -279,6 +289,7 @@ class InventoryController extends Controller
         $data = $request->all();
         $images = $request->post('shop_product_media');
         unset($data['shop_product_media']);
+        unset($data['category_tree']);
         unset($data['item_id']);
 
         $newImages = [];

@@ -42,4 +42,8 @@ class ShopProduct extends Model
     public function shopProductMedia() {
         return $this->hasMany(ShopProductMedia::class, 'id_product');
     }
+
+    public function shopCategory() {
+        return $this->hasOne(ShopCategories::class);
+    }
 }

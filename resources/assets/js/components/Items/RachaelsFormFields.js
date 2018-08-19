@@ -64,7 +64,8 @@ export default class RachaelsFormFields extends Component {
                 parse: this.parseNumber
             },
             {
-                name: 'category',
+                name: 'id_category',
+                label: 'Category',
                 component: SelectCategory
             }
         ]
