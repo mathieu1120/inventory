@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ShopCategories;
+use App\ShopProduct;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Item;
@@ -34,7 +36,7 @@ class ShopController extends Controller
         $orderBy = $request->query('orderby', 'name');
         $orderType = $request->query('ordertype', 'asc');
 
-        $query = Item::where('status', 1);
+        $query = ShopProduct::with('shopProductMedia')->where('status', 1);
 
         if ($search) {
             $searchQuery = $query->where(function ($q) use ($search) {
@@ -46,18 +48,6 @@ class ShopController extends Controller
         }
 
         $items = $query
-            ->select(['id',
-                'name',
-                'cost',
-                'price',
-                'image_url',
-                'sold',
-                'sold_at',
-                'sold_price',
-                'shipping_cost',
-                'shipping_price',
-                'shipping_at',
-                'etsy_listing_id'])
             ->orderBy($orderBy, $orderType)
             ->skip($offset)
             ->take(50)
@@ -73,10 +63,14 @@ class ShopController extends Controller
     }
 
     public function item(Request $request, JsonResponse $response, $id) {
-        $item = Item::find($id);
+        $item = ShopProduct::with('shopProductMedia')
+            ->where('id' , $id)
+            ->where('status', true)
+            ->first()
+            ->toArray();
 
         return $response->setData(
-            $item->editableFieldsArray()
+            $item
         );
     }
 }

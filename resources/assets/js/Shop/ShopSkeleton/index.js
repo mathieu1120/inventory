@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Menu from './Menu';
 import Items from './Items';
-import ItemPage from './ItemPage';
+import ItemPage from './ItemPage/index';
 import CartButton from './CartButton';
 import Cart from './Cart';
 import { BrowserRouter as Router, Route } from "react-router-dom";

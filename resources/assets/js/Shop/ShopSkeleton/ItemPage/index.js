@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 import {withRouter} from "react-router-dom";
-import {getItemFromState, getLoadingFromState} from "../../selectors/shop/items";
-import {getItem} from "../../actions/shop/items";
+import {getItemFromState, getLoadingFromState} from "../../../selectors/shop/items";
+import {getItem} from "../../../actions/shop/items";
+import ImageGallery from 'react-image-gallery';
 
 class ItemPage extends Component {
     static propTypes = {
@@ -20,6 +21,24 @@ class ItemPage extends Component {
         this.props.getItem(this.props.id);
     }
 
+    renderImages = () => {
+        const {
+            item: {
+                shop_product_media
+            },
+        } = this.props;
+
+        const images = shop_product_media.map((media) => {
+                return {
+                    original: media.url,
+                    thumbnail: media.url,
+                };
+            });
+        return (
+            <ImageGallery items={images} />
+        );
+    }
+
     render() {
         const {
             item,
@@ -30,10 +49,7 @@ class ItemPage extends Component {
             !!item.id && item.id === Number(id) ?
                 <div className="row">
                     <div className="col-md-4">
-                        <img
-                            className="img-responsive"
-                            src={item.image_url ? item.image_url : 'http://shop.shoprachaels.com/storage/violette.jpg'}
-                            alt={item.name}/>
+                        {this.renderImages()}
                     </div>
                     <div className="col-md-8">
                         <h2>{item.name}</h2>
