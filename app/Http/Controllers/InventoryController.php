@@ -249,6 +249,11 @@ class InventoryController extends Controller
          * @var ShopProduct $shopProduct
          */
         $shopProduct = ShopProduct::with('shopProductMedia')->find($productId);
+        if (empty($shopProduct->id)) {
+            return $response->setData([
+                'product' => null
+            ]);
+        }
         /**
          * @var ShopCategories $shopCategory
          */

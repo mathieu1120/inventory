@@ -46,4 +46,8 @@ class ShopProduct extends Model
     public function shopCategory() {
         return $this->hasOne(ShopCategories::class);
     }
+
+    public function productCarts() {
+        return $this->hasMany(ShopCartProducts::class, 'id_product');
+    }
 }

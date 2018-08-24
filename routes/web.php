@@ -33,6 +33,9 @@ Route::domain('shop.shoprachaels.com')->group(function () {
 
     Route::get('api/shop/items', 'ShopController@items');
     Route::get('api/shop/items/{id}', 'ShopController@item');
+
+    Route::get('api/shop/cart/items', 'ShopController@cart');
+    Route::post('api/shop/cart/item', 'ShopController@addProductToCart');
 });
 
 Route::domain('inventory.shoprachaels.com')->group(function () {

@@ -33,7 +33,7 @@ class Items extends Component {
                             <Link to={`/items/${item.id}`}>
                                 <div className="thumbnail">
                                     <img
-                                        src={item.image_url ? item.image_url : 'http://shop.shoprachaels.com/storage/violette.jpg'}
+                                        src={item.shop_product_media[0].url ? item.shop_product_media[0].url : null}
                                         alt={item.name}/>
                                     <p>{item.name}</p>
                                     <p>{item.price}</p>

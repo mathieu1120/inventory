@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {withRouter} from "react-router-dom";
 import {getItemFromState, getLoadingFromState} from "../../../selectors/shop/items";
 import {getItem} from "../../../actions/shop/items";
+import {addItem} from "../../../actions/shop/cart";
 import ImageGallery from 'react-image-gallery';
 
 class ItemPage extends Component {
@@ -15,6 +16,7 @@ class ItemPage extends Component {
         item: PropTypes.object.isRequired,
         getItem: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
+        addItem: PropTypes.func.isRequired,
     }
 
     componentDidMount = () => {
@@ -35,8 +37,12 @@ class ItemPage extends Component {
                 };
             });
         return (
-            <ImageGallery items={images} />
+            <ImageGallery items={images} lazyLoad={true} />
         );
+    }
+
+    addItem = () => {
+        return this.props.addItem(this.props.item.id);
     }
 
     render() {
@@ -53,9 +59,10 @@ class ItemPage extends Component {
                     </div>
                     <div className="col-md-8">
                         <h2>{item.name}</h2>
+                        <p>${item.price}</p>
                         <p>{item.description}</p>
                         <p>{item.details}</p>
-                        <button className="btn">Add to card</button>
+                        <button className="btn" onClick={this.addItem}>Add to card</button>
                     </div>
                 </div>
                 :
@@ -78,6 +85,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getItem: (id) => {
             return dispatch(getItem(id));
+        },
+        addItem: (id) => {
+            return dispatch(addItem(id));
         }
     };
 }

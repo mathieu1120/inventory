@@ -1,13 +1,9 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-
 @import "~react-image-gallery/styles/scss/image-gallery.scss";
 
 body {
@@ -41,6 +37,42 @@ body {
       text-decoration: none;
       img {
         max-width: 100%;
+      }
+    }
+  }
+}
+
+.cart {
+  table.table {
+    margin-top: 25px;
+    thead {
+      tr {
+        th {
+          font-weight: lighter;
+        }
+        :last-child {
+          text-align: right;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          vertical-align: middle;
+          line-height: 100px;
+          img {
+            height: 100px;
+            max-width: 100px;
+            vertical-align: middle;
+          }
+          .glyphicon {
+            padding-left: 0;
+            line-height: 100px;
+          }
+        }
+        td:last-child {
+          text-align: right;
+        }
       }
     }
   }

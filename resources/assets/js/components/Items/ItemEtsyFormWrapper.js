@@ -37,7 +37,7 @@ class ItemEtsyFormWrapper extends Component {
         return (
             <div>
                 {
-                    this.props.selectedItem.etsy_listing_id && !!item && !!item.results &&
+                    this.props.selectedItem.etsy_listing_id > 0 && !!item && !!item.results &&
                     <ItemEtsyForm
                         item={item.results[0]}
                         initialValues={{

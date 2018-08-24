@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\ShopCartProducts;
+use App\ShopCarts;
 use App\ShopCategories;
 use App\ShopProduct;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Item;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -54,7 +57,7 @@ class ShopController extends Controller
             ->get()
             ->toArray();
 
-        $count = isset($searchCount) ? $searchCount : Item::where('status', 1)->count();
+        $count = isset($searchCount) ? $searchCount : ShopProduct::where('status', 1)->count();
 
         $response->headers->set('X-ITEMS-TOTAL', $count);
         $response->headers->set('X-ITEMS-NEXT-OFFSET', $offset + 50 < $count ? $offset + 50 : -1);
@@ -72,5 +75,59 @@ class ShopController extends Controller
         return $response->setData(
             $item
         );
+    }
+
+    public function cart(Request $request, JsonResponse $response) {
+        $uuidCart = $request->cookie('uuid_cart');
+        if (!$uuidCart) {
+            return $response->setData([
+                'products' => []
+            ]);
+        }
+
+        $products = ShopProduct
+            ::with('shopProductMedia')
+            ->join('shop_cart_products', 'shop_products.id', '=', 'shop_cart_products.id_product')
+            ->join('shop_carts', 'shop_carts.id', 'shop_cart_products.id_cart')
+            ->where('shop_carts.uuid', $uuidCart)
+            ->select('shop_products.*')
+            ->get()
+            ->toArray();
+
+        return $response->setData([
+            'products' => $products
+        ]);
+    }
+
+    public function addProductToCart(Request $request, JsonResponse $response) {
+        $uuidCart = $request->cookie('uuid_cart');
+        $productId = $request->post('id_product');
+        $quantity = $request->post('quantity', 1);
+        $cart = null;
+        if (!$uuidCart) {
+            $uuidCart = uniqid();
+            $cart = ShopCarts::create([
+                'uuid' => $uuidCart
+            ]);
+        } else {
+            $cart = ShopCarts::where('status', 1)->where('uuid', $uuidCart)->first();
+        }
+        $cart->products()->create([
+            'id_product' => $productId,
+            'quantity'   => $quantity
+        ]);
+
+        $products = ShopProduct
+            ::with('shopProductMedia')
+            ->join('shop_cart_products', 'shop_products.id', '=', 'shop_cart_products.id_product')
+            ->join('shop_carts', 'shop_carts.id', 'shop_cart_products.id_cart')
+            ->where('shop_carts.uuid', $uuidCart)
+            ->select('shop_products.*')
+            ->get()
+            ->toArray();
+
+        return $response->setData([
+            'products' => $products
+        ])->cookie('uuid_cart', $uuidCart, 15);
     }
 }
