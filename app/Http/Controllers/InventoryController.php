@@ -254,15 +254,12 @@ class InventoryController extends Controller
                 'product' => null
             ]);
         }
+        $product = $shopProduct->toArray();
         /**
          * @var ShopCategories $shopCategory
          */
         $shopCategory = ShopCategories::find($shopProduct->id_category);
-        $product = null;
-        if (!empty($shopProduct)) {
-            $product = $shopProduct->toArray();
-            $product['category_tree'] = $shopCategory->getBigTreeToCategory();
-        }
+        $product['category_tree'] = !empty($shopCategory) ? $shopCategory->getBigTreeToCategory() : null;
 
         return $response->setData([
             'product' => $product

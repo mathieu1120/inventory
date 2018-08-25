@@ -8,12 +8,18 @@ import {
     soldItem
 } from '../../actions/inventory/rachaels';
 import ItemModal from './ItemModal';
+import {getEtsyItemFromState, getEtsyLoadingFromState} from "../../selectors/inventory/etsy";
+import {getEtsyItem} from "../../actions/inventory/etsy";
 
 class RachaelsFormCTA extends Component {
     static propTypes = {
         handleSubmit: PropTypes.func.isRequired,
         pristine: PropTypes.bool.isRequired,
         reset: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
+        etsyItem: PropTypes.object,
+        change: PropTypes.func.isRequired,
+        getEtsyItem: PropTypes.func,
     };
 
     constructor(props) {
@@ -26,6 +32,13 @@ class RachaelsFormCTA extends Component {
             modalOpen: false,
             modalButtonAction: this.onModalClose
         };
+    }
+
+    componentWillReceiveProps(newProps) {
+        console.log('lol')
+        if (newProps.item.etsy_listing_id > 0 && jQuery.isEmptyObject(newProps.etsyItem)) {
+            this.props.getEtsyItem(newProps.item.etsy_listing_id);
+        }
     }
 
     submit = (values) => {
@@ -55,6 +68,24 @@ class RachaelsFormCTA extends Component {
         this.setState({
            modalOpen: false
         });
+    }
+
+    copyFromEtsy = () => {
+        const {
+            etsyItem,
+            change
+        } = this.props;
+
+        change('name', etsyItem.item.results[0].title);
+        change('description', etsyItem.item.results[0].description);
+        change('price', etsyItem.item.results[0].price);
+        change('weight', etsyItem.item.results[0].item_weight);
+        change('length', etsyItem.item.results[0].item_length);
+        change('width', etsyItem.item.results[0].item_width);
+        change('height', etsyItem.item.results[0].item_height);
+        change('shop_product_media', etsyItem.images.results.map((image) => ({
+            url: image.url_fullxfull
+        })))
     }
 
     render() {
@@ -89,10 +120,28 @@ class RachaelsFormCTA extends Component {
                         )}>
                         Reset
                     </button>
+                    <br/>
+                    {
+                        this.props.item.etsy_listing_id > 0 && !jQuery.isEmptyObject(this.props.etsyItem) &&
+                        <button
+                            onClick={this.copyFromEtsy}
+                            type="button"
+                            className={classnames(
+                                "list-group-item",
+                            )}>
+                            Copy from Etsy
+                        </button>
+                    }
                 </div>
             </div>
         );
     }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        etsyItem: getEtsyItemFromState(state),
+    };
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -105,8 +154,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         soldItem: (values) => {
             dispatch(soldItem(values));
+        },
+        getEtsyItem: (id) => {
+            return dispatch(getEtsyItem(id));
         }
     };
 };
 
-export default connect(null, mapDispatchToProps)(RachaelsFormCTA);
+export default connect(mapStateToProps, mapDispatchToProps)(RachaelsFormCTA);

@@ -46,6 +46,7 @@ class RachaelsFormWrapper extends Component {
                             item_id: this.props.selectedItem.id
                         }}
                         form={`product`}
+                        item={this.props.selectedItem}
                     />
                 }
                 {

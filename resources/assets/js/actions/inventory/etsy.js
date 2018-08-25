@@ -40,6 +40,12 @@ export function getEtsyItem(id) {
             type: ETSY_ACTION.GET_ITEM.PENDING,
         });
 
+        if (!id) {
+            return dispatch({
+                type: ETSY_ACTION.GET_ITEM.ERROR,
+            });
+        }
+
         return sdk.resources.inventory.etsy.getItem(id)
             .then(response => {
                 return response.json();

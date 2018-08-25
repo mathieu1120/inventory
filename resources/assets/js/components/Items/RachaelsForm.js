@@ -7,8 +7,10 @@ import RachaelsFormFields from './RachaelsFormFields';
 class RachaelsForm extends Component {
 
     static propTypes = {
+        item: PropTypes.object.isRequired,
         form: PropTypes.string.isRequired,
         handleSubmit: PropTypes.func.isRequired,
+        change: PropTypes.func.isRequired,
         pristine: PropTypes.bool.isRequired,
         submitting: PropTypes.bool.isRequired,
         product: PropTypes.object
@@ -33,6 +35,8 @@ class RachaelsForm extends Component {
                         pristine={this.props.pristine}
                         submitting={this.props.submitting}
                         reset={this.props.reset}
+                        item={this.props.item}
+                        change={this.props.change}
                     />
                 </div>
             </form>

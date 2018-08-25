@@ -93,6 +93,10 @@ export default function metaItems(state = metaItemsState, action) {
             return Object.assign({}, state, {
                 loading_etsy_form: false
             });
+        case ETSY_ACTION.GET_ITEM.ERROR:
+            return Object.assign({}, state, {
+                loading_etsy_form: false
+            });
         default:
             return state;
     }
