@@ -20,5 +20,4 @@ return array(
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
     'Artdarek\\OAuth' => array($vendorDir . '/oriceon/oauth-5-laravel/src'),
-    'Aimeos\\Shop\\' => array($vendorDir . '/aimeos/aimeos-laravel/src'),
 );

@@ -4,6 +4,7 @@ import Items from './Items';
 import ItemPage from './ItemPage/index';
 import CartButton from './CartButton';
 import Cart from './Cart';
+import Checkout from './Checkout';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default class ShopSkeleton extends Component {
@@ -22,6 +23,7 @@ export default class ShopSkeleton extends Component {
                             <Route exact path="/" component={Items}/>
                             <Route path="/items/:id" component={ItemPage}/>
                             <Route exact path="/cart" component={Cart}/>
+                            <Route exact path="/checkout" component={Checkout}/>
                         </div>
                     </div>
                 </div>

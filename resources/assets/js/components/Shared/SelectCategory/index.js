@@ -56,10 +56,10 @@ class SelectCategory extends Component {
                 });
             }
 
-            this.state = {
+            this.setState({
                 fields,
                 initialCategories
-            }
+            });
         }
     }
 

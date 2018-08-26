@@ -19,7 +19,7 @@ const FormFields = ({fields, formName}) => {
                                    className="col-sm-3 control-label">
                                 {!!field.label ? field.label : field.name.charAt(0).toUpperCase() + field.name.slice(1).split('_').join(' ')}
                             </label>
-                            <div className="col-sm-9">
+                            <div className={`col-sm-9${!!field.className ? ` ${field.className}` : ''}`}>
                                 <Field
                                     parse={!!field.parse ? value => field.parse(value) : null}
                                     className="form-control"

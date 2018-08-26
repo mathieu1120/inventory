@@ -53,6 +53,9 @@ body {
         :last-child {
           text-align: right;
         }
+        :nth-child(2) {
+          text-align: center;
+        }
       }
     }
     tbody {
@@ -70,10 +73,19 @@ body {
             line-height: 100px;
           }
         }
-        td:last-child {
+        :last-child {
           text-align: right;
+        }
+        :nth-child(2) {
+          text-align: center;
         }
       }
     }
   }
+}
+
+.cart-product-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

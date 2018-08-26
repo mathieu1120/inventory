@@ -70615,7 +70615,7 @@ var FormFields = function FormFields(_ref) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-sm-9' },
+                    { className: 'col-sm-9' + (!!field.className ? ' ' + field.className : '') },
                     _react2.default.createElement(
                         _reduxForm.Field,
                         {
@@ -78156,10 +78156,10 @@ var SelectCategory = function (_Component) {
                     });
                 }
 
-                _this.state = {
+                _this.setState({
                     fields: fields,
                     initialCategories: initialCategories
-                };
+                });
             }
         };
 

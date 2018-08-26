@@ -69910,7 +69910,90 @@ var matchPath = function matchPath(pathname) {
 /* 532 */,
 /* 533 */,
 /* 534 */,
-/* 535 */,
+/* 535 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reduxForm = __webpack_require__(34);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FormFields = function FormFields(_ref) {
+    var fields = _ref.fields,
+        formName = _ref.formName;
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        fields.map(function (field, index) {
+            return !!field.type && field.type === 'hidden' ? _react2.default.createElement(_reduxForm.Field, {
+                key: index,
+                parse: !!field.parse ? function (value) {
+                    return field.parse(value);
+                } : null,
+                name: field.name,
+                component: 'input',
+                type: 'hidden' }) : _react2.default.createElement(
+                'div',
+                { key: index, className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { htmlFor: '' + formName + field.name,
+                        className: 'col-sm-3 control-label' },
+                    !!field.label ? field.label : field.name.charAt(0).toUpperCase() + field.name.slice(1).split('_').join(' ')
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-9' + (!!field.className ? ' ' + field.className : '') },
+                    _react2.default.createElement(
+                        _reduxForm.Field,
+                        {
+                            parse: !!field.parse ? function (value) {
+                                return field.parse(value);
+                            } : null,
+                            className: 'form-control',
+                            id: '' + formName + field.name,
+                            name: field.name,
+                            component: !!field.component ? field.component : 'input',
+                            type: !!field.type ? field.type : 'text',
+                            props: !!field.props ? field.props : null
+                        },
+                        !!field.options ? field.options.map(function (option, index) {
+                            return _react2.default.createElement(
+                                'option',
+                                { key: index, value: option },
+                                option
+                            );
+                        }) : null
+                    )
+                )
+            );
+        })
+    );
+};
+
+FormFields.propTypes = {
+    fields: _propTypes2.default.array.isRequired,
+    formName: _propTypes2.default.string.isRequired
+};
+
+exports.default = FormFields;
+
+/***/ }),
 /* 536 */,
 /* 537 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -70906,7 +70989,86 @@ exports.getItemsFromState = getItemsFromState;
 /* 595 */,
 /* 596 */,
 /* 597 */,
-/* 598 */,
+/* 598 */
+/***/ (function(module, exports) {
+
+/*global module:true*/
+/*jslint nomen:true*/
+/**
+ * @module Utility
+ */
+(function (context, undefined) {
+    'use strict';
+
+    var DEFAULT_TRUNCATE_SYMBOL = '…',
+        // Limit emails to no more than about 600 chars, well over the max of ~300.
+        // cf. RFC: https://www.rfc-editor.org/errata_search.php?eid=1690
+        URL_REGEX = /(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)|((mailto:)?[_.\w-]{1,300}@(.{1,300}\.)[a-zA-Z]{2,3})/g;
+
+    function __appendEllipsis(string, options, content) {
+        if (content.length === string.length || !options.ellipsis) {
+            return content;
+        }
+        content += options.ellipsis;
+        return content;
+    }
+    /**
+     * Truncate HTML string and keep tag safe.
+     *
+     * @method truncate
+     * @param {String} string string needs to be truncated
+     * @param {Number} maxLength length of truncated string
+     * @param {Object} options (optional)
+     * @param {Boolean} [options.keepImageTag] flag to specify if keep image tag, false by default
+     * @param {Boolean|String} [options.ellipsis] omission symbol for truncated string, '...' by default
+     * @return {String} truncated string
+     */
+    function truncate(string, maxLength, options) {
+        var content = '', // truncated text storage
+            matches = true,
+            remainingLength = maxLength,
+            result,
+            index;
+
+        options = options || {};
+        options.ellipsis = (typeof options.ellipsis === "undefined") ? DEFAULT_TRUNCATE_SYMBOL : options.ellipsis;
+
+        if (!string || string.length === 0) {
+            return '';
+        }
+
+        matches = true;
+        while (matches) {
+            URL_REGEX.lastIndex = content.length;
+            matches = URL_REGEX.exec(string);
+
+            if (!matches || (matches.index - content.length) >= remainingLength) {
+                content += string.substring(content.length, maxLength);
+                return __appendEllipsis(string, options, content, maxLength);
+            }
+
+            result = matches[0];
+            index = matches.index;
+            content += string.substring(content.length, index + result.length);
+            remainingLength -= index + result.length;
+
+            if (remainingLength <= 0) {
+                break;
+            }
+        }
+
+        return __appendEllipsis(string, options, content, maxLength);
+    }
+
+    if ('undefined' !== typeof module && module.exports) {
+        module.exports = truncate;
+    } else {
+        context.truncate = truncate;
+    }
+}(String));
+
+
+/***/ }),
 /* 599 */,
 /* 600 */,
 /* 601 */,
@@ -71289,6 +71451,10 @@ var _Cart = __webpack_require__(665);
 
 var _Cart2 = _interopRequireDefault(_Cart);
 
+var _Checkout = __webpack_require__(677);
+
+var _Checkout2 = _interopRequireDefault(_Checkout);
+
 var _reactRouterDom = __webpack_require__(107);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -71335,7 +71501,8 @@ var ShopSkeleton = function (_Component) {
                             { className: 'col-lg-10' },
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Items2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/items/:id', component: _index2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cart', component: _Cart2.default })
+                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cart', component: _Cart2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout', component: _Checkout2.default })
                         )
                     )
                 )
@@ -77254,6 +77421,10 @@ var _cart2 = __webpack_require__(545);
 
 var _reactRedux = __webpack_require__(9);
 
+var _truncate = __webpack_require__(598);
+
+var _truncate2 = _interopRequireDefault(_truncate);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -77276,7 +77447,7 @@ var Cart = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "cart row col-md-9" },
+                { className: "cart col-md-9" },
                 _react2.default.createElement(
                     "h2",
                     null,
@@ -77317,43 +77488,56 @@ var Cart = function (_Component) {
                                 { key: index },
                                 _react2.default.createElement(
                                     "td",
-                                    null,
+                                    { className: "col-md-8" },
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "col-md-1" },
+                                        _react2.default.createElement("span", { className: "glyphicon glyphicon-remove", "aria-hidden": "true" })
+                                    ),
                                     _react2.default.createElement(
                                         "div",
                                         { className: "col-md-2" },
-                                        _react2.default.createElement("span", { className: "glyphicon glyphicon-remove col-md-3", "aria-hidden": "true" })
-                                    ),
-                                    _react2.default.createElement(
-                                        "div",
-                                        null,
                                         _react2.default.createElement("img", {
                                             src: item.shop_product_media[0].url,
                                             alt: item.name,
-                                            className: "img-thumbnail col-md-4" })
+                                            className: "img-rounded" })
                                     ),
                                     _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: "/items/" + item.id, className: "col-md-6" },
+                                        "div",
+                                        { className: "col-md-8" },
                                         _react2.default.createElement(
-                                            "b",
-                                            null,
-                                            item.name
+                                            _reactRouterDom.Link,
+                                            { to: "/items/" + item.id, className: "cart-product-name" },
+                                            _react2.default.createElement(
+                                                "b",
+                                                null,
+                                                (0, _truncate2.default)(item.name, 40)
+                                            )
                                         )
                                     )
                                 ),
                                 _react2.default.createElement(
                                     "td",
-                                    null,
+                                    { className: "col-md-2" },
                                     "1"
                                 ),
                                 _react2.default.createElement(
                                     "td",
-                                    null,
+                                    { className: "col-md-2" },
                                     "$",
                                     item.price
                                 )
                             );
                         })
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: "/checkout" },
+                    _react2.default.createElement(
+                        "button",
+                        { type: "button", className: "btn pull-right" },
+                        "Checkout"
                     )
                 )
             );
@@ -77384,6 +77568,178 @@ var mapDipatchToProps = function mapDipatchToProps(dispatch) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDipatchToProps)(Cart);
+
+/***/ }),
+/* 666 */,
+/* 667 */,
+/* 668 */,
+/* 669 */,
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _DestinationAddress = __webpack_require__(678);
+
+var _DestinationAddress2 = _interopRequireDefault(_DestinationAddress);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Checkout = function (_Component) {
+    _inherits(Checkout, _Component);
+
+    function Checkout() {
+        _classCallCheck(this, Checkout);
+
+        return _possibleConstructorReturn(this, (Checkout.__proto__ || Object.getPrototypeOf(Checkout)).apply(this, arguments));
+    }
+
+    _createClass(Checkout, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "destination col-md-9" },
+                _react2.default.createElement(
+                    "h2",
+                    null,
+                    "Checkout"
+                ),
+                _react2.default.createElement(_DestinationAddress2.default, null)
+            );
+        }
+    }]);
+
+    return Checkout;
+}(_react.Component);
+
+exports.default = Checkout;
+
+/***/ }),
+/* 678 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reduxForm = __webpack_require__(34);
+
+var _FormFields = __webpack_require__(535);
+
+var _FormFields2 = _interopRequireDefault(_FormFields);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DestinationAddress = function (_Component) {
+    _inherits(DestinationAddress, _Component);
+
+    function DestinationAddress() {
+        _classCallCheck(this, DestinationAddress);
+
+        return _possibleConstructorReturn(this, (DestinationAddress.__proto__ || Object.getPrototypeOf(DestinationAddress)).apply(this, arguments));
+    }
+
+    _createClass(DestinationAddress, [{
+        key: 'render',
+        value: function render() {
+            var fields = [{
+                name: 'first_name',
+                label: 'First Name'
+            }, {
+                name: 'last_name',
+                label: 'Last Name'
+            }, {
+                name: 'address',
+                component: 'textarea',
+                props: { rows: 3 }
+            }, {
+                name: 'city'
+            }, {
+                name: 'zip_code',
+                label: 'Zip Code',
+                className: 'col-md-2'
+            }, {
+                name: 'state',
+                component: 'select',
+                options: ['', 'lol']
+            }];
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'destination col-md-9' },
+                _react2.default.createElement(
+                    'h3',
+                    null,
+                    'Destination'
+                ),
+                _react2.default.createElement(
+                    'form',
+                    { className: 'form-horizontal' },
+                    _react2.default.createElement(_FormFields2.default, { fields: fields, formName: 'destination' }),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-sm-offset-3 col-sm-9' },
+                            _react2.default.createElement(
+                                'button',
+                                { type: 'submit', className: 'btn btn-default' },
+                                'Next'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return DestinationAddress;
+}(_react.Component);
+
+exports.default = (0, _reduxForm.reduxForm)({
+    form: 'destination'
+})(DestinationAddress);
 
 /***/ })
 /******/ ]);

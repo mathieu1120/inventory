@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {getItems} from "../../actions/shop/cart";
 import {getItemsFromState} from "../../selectors/shop/cart";
 import {connect} from "react-redux";
+import truncate from 'truncate';
 
 
 class Cart extends Component {
@@ -14,7 +15,7 @@ class Cart extends Component {
 
     render() {
         return (
-            <div className="cart row col-md-9">
+            <div className="cart col-md-9">
                 <h2>Shopping cart</h2>
                 <table className="table table-hover">
                     <thead>
@@ -29,29 +30,36 @@ class Cart extends Component {
                         this.props.items.map((item, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>
-                                        <div className="col-md-2">
-                                            <span className="glyphicon glyphicon-remove col-md-3" aria-hidden="true">
+                                    <td className="col-md-8">
+                                        <div className="col-md-1">
+                                            <span className="glyphicon glyphicon-remove" aria-hidden="true">
                                             </span>
                                         </div>
-                                        <div>
+                                        <div className="col-md-2">
                                             <img
                                                 src={item.shop_product_media[0].url}
                                                 alt={item.name}
-                                                className="img-thumbnail col-md-4"/>
+                                                className="img-rounded"/>
                                         </div>
-                                        <Link to={`/items/${item.id}`} className="col-md-6">
-                                            <b>{item.name}</b>
-                                        </Link>
+                                        <div className="col-md-8">
+                                            <Link to={`/items/${item.id}`} className="cart-product-name">
+                                                <b>{truncate(item.name, 40)}</b>
+                                            </Link>
+                                        </div>
                                     </td>
-                                    <td>1</td>
-                                    <td>${item.price}</td>
+                                    <td className="col-md-2">1</td>
+                                    <td className="col-md-2">${item.price}</td>
                                 </tr>
                             );
                         })
                     }
                     </tbody>
                 </table>
+                <Link to="/checkout">
+                    <button type="button" className="btn pull-right">
+                        Checkout
+                    </button>
+                </Link>
             </div>
         );
     }

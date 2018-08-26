@@ -30,6 +30,7 @@ Route::domain('shop.shoprachaels.com')->group(function () {
     Route::get('/', 'ShopController@index');
     Route::get('/items/{id}', 'ShopController@index');
     Route::get('/cart', 'ShopController@index');
+    Route::get('/checkout', 'ShopController@index');
 
     Route::get('api/shop/items', 'ShopController@items');
     Route::get('api/shop/items/{id}', 'ShopController@item');

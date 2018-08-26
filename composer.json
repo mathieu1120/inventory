@@ -1,18 +1,13 @@
 {
-    "name": "aimeos/aimeos",
-    "description": "Aimeos shop system",
-    "keywords": ["Aimeos", "e-commerce", "shop", "laravel", "distribution"],
+    "name": "ShopRachaels",
+    "description": "ShopRachaels shop system",
+    "keywords": ["e-commerce", "shop", "laravel", "distribution"],
     "license": "MIT",
     "type": "project",
     "prefer-stable": true,
     "minimum-stability": "dev",
-    "repositories": [{
-        "type": "composer",
-        "url": "https://packages.aimeos.org/aimeoscom"
-    }],
     "require": {
         "php": ">=7.0.4",
-        "aimeos/aimeos-laravel": "~2017.10",
         "doctrine/dbal": "2.6.3",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "^6.3",
