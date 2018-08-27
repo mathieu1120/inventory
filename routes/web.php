@@ -31,12 +31,14 @@ Route::domain('shop.shoprachaels.com')->group(function () {
     Route::get('/items/{id}', 'ShopController@index');
     Route::get('/cart', 'ShopController@index');
     Route::get('/checkout', 'ShopController@index');
+    Route::get('/checkout/carrier', 'ShopController@index');
 
     Route::get('api/shop/items', 'ShopController@items');
     Route::get('api/shop/items/{id}', 'ShopController@item');
 
     Route::get('api/shop/cart/items', 'ShopController@cart');
     Route::post('api/shop/cart/item', 'ShopController@addProductToCart');
+    Route::post('api/shop/cart/destination', 'ShopController@addDestinationToCart');
 });
 
 Route::domain('inventory.shoprachaels.com')->group(function () {

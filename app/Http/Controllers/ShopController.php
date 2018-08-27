@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestinationRequest;
 use App\ShopCartProducts;
 use App\ShopCarts;
 use App\ShopCategories;
@@ -10,6 +11,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Item;
 use Illuminate\Support\Facades\DB;
+use InstagramAPI\Realtime\Handler\HandlerException;
+use Orchestra\Parser\Xml\Facade as XmlParser;
+use USPS\AddressVerify;
 
 class ShopController extends Controller
 {
@@ -128,6 +132,41 @@ class ShopController extends Controller
 
         return $response->setData([
             'products' => $products
-        ])->cookie('uuid_cart', $uuidCart, 15);
+        ])->cookie('uuid_cart', $uuidCart, 30);
+    }
+
+    public function addDestinationToCart(DestinationRequest $request, JsonResponse $response) {
+        $uuidCart = $request->cookie('uuid_cart');
+        /*if (!$uuidCart) {
+            return $response->setStatusCode('123');
+        }*/
+        $destination = $request->post('destination');
+        $firstName = $destination['first_name'];
+        $lastName = $destination['last_name'];
+        $address1 = $destination['address'];
+        $city = $destination['city'];
+        $zip = $destination['zip_code'];
+        $state = $destination['state'];
+
+        $usps = new AddressVerify('900SHOPR3170');
+
+
+        $address = new \USPS\Address();
+        $address->setApt('');
+        $address->setAddress($address1);
+        $address->setCity($city);
+        $address->setState($state);
+        $address->setZip5($zip);
+        $address->setZip4('');
+
+        $usps->addAddress($address);
+
+        $usps->verify();
+        if (!$usps->isSuccess()) {
+            throw new \Error($usps->getErrorMessage(), 403);
+        }
+
+        $verifiedAddress = $usps->getArrayResponse()['AddressValidateResponse']['Address'];
+
     }
 }

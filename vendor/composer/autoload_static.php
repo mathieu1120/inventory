@@ -11,8 +11,8 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '6b06ce8ccf69c43a60a1e48495a034c9' => __DIR__ . '/..' . '/react/promise-timer/src/functions.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -20,6 +20,7 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'ebf8799635f67b5d7248946fe2154f4a' => __DIR__ . '/..' . '/ringcentral/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '136e53dbd9e10cf4f87df4067d0ef0d2' => __DIR__ . '/..' . '/laravie/parser/src/helpers.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
@@ -39,6 +40,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
             'Winbox\\' => 7,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
+        ),
+        'U' => 
+        array (
+            'USPS\\' => 5,
         ),
         'T' => 
         array (
@@ -83,6 +88,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
         ),
+        'O' => 
+        array (
+            'Orchestra\\Parser\\' => 17,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
@@ -91,6 +100,7 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         array (
             'League\\Flysystem\\' => 17,
             'LazyJsonMapper\\' => 15,
+            'Laravie\\Parser\\' => 15,
             'Laravel\\Tinker\\' => 15,
         ),
         'I' => 
@@ -165,6 +175,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'USPS\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vinceg/usps-php-api/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -290,6 +304,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'Orchestra\\Parser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/orchestra/parser/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -301,6 +319,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'LazyJsonMapper\\' => 
         array (
             0 => __DIR__ . '/..' . '/lazyjsonmapper/lazyjsonmapper/src',
+        ),
+        'Laravie\\Parser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravie/parser/src',
         ),
         'Laravel\\Tinker\\' => 
         array (
@@ -511,6 +533,7 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\DestinationRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DestinationRequest.php',
         'App\\Http\\Requests\\InventoryItemEditRequest' => __DIR__ . '/../..' . '/app/Http/Requests/InventoryItemEditRequest.php',
         'App\\Http\\Requests\\InventoryShopProductEditRequest' => __DIR__ . '/../..' . '/app/Http/Requests/InventoryShopProductEditRequest.php',
         'App\\Item' => __DIR__ . '/../..' . '/app/Item.php',
@@ -2892,6 +2915,13 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'Laravie\\Parser\\Document' => __DIR__ . '/..' . '/laravie/parser/src/Document.php',
+        'Laravie\\Parser\\InvalidContentException' => __DIR__ . '/..' . '/laravie/parser/src/InvalidContentException.php',
+        'Laravie\\Parser\\Reader' => __DIR__ . '/..' . '/laravie/parser/src/Reader.php',
+        'Laravie\\Parser\\Xml\\Concerns\\SupportMultiLevel' => __DIR__ . '/..' . '/laravie/parser/src/Xml/Concerns/SupportMultiLevel.php',
+        'Laravie\\Parser\\Xml\\Definitions\\MultiLevel' => __DIR__ . '/..' . '/laravie/parser/src/Xml/Definitions/MultiLevel.php',
+        'Laravie\\Parser\\Xml\\Document' => __DIR__ . '/..' . '/laravie/parser/src/Xml/Document.php',
+        'Laravie\\Parser\\Xml\\Reader' => __DIR__ . '/..' . '/laravie/parser/src/Xml/Reader.php',
         'LazyJsonMapper\\Exception\\BadPropertyDefinitionException' => __DIR__ . '/..' . '/lazyjsonmapper/lazyjsonmapper/src/Exception/BadPropertyDefinitionException.php',
         'LazyJsonMapper\\Exception\\BadPropertyMapException' => __DIR__ . '/..' . '/lazyjsonmapper/lazyjsonmapper/src/Exception/BadPropertyMapException.php',
         'LazyJsonMapper\\Exception\\CircularPropertyMapException' => __DIR__ . '/..' . '/lazyjsonmapper/lazyjsonmapper/src/Exception/CircularPropertyMapException.php',
@@ -3215,6 +3245,10 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'OAuth_io\\NotInitializedException' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/NotInitializedException.php',
         'OAuth_io\\OAuth' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/OAuth.php',
         'OAuth_io\\RequestObject' => __DIR__ . '/..' . '/oauth-io/oauth/src/OAuth_io/RequestObject.php',
+        'Orchestra\\Parser\\XmlServiceProvider' => __DIR__ . '/..' . '/orchestra/parser/src/XmlServiceProvider.php',
+        'Orchestra\\Parser\\Xml\\Document' => __DIR__ . '/..' . '/orchestra/parser/src/Xml/Document.php',
+        'Orchestra\\Parser\\Xml\\Facade' => __DIR__ . '/..' . '/orchestra/parser/src/Xml/Facade.php',
+        'Orchestra\\Parser\\Xml\\Reader' => __DIR__ . '/..' . '/orchestra/parser/src/Xml/Reader.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -4930,6 +4964,22 @@ class ComposerStaticInit32022683ce1c4ca1cfb3a1dbaa99aa5f
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
+        'USPS\\Address' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/Address.php',
+        'USPS\\AddressVerify' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/AddressVerify.php',
+        'USPS\\CityStateLookup' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/CityStateLookup.php',
+        'USPS\\FirstClassServiceStandards' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/FirstClassServiceStandards.php',
+        'USPS\\InternationalLabel' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/InternationalLabel.php',
+        'USPS\\OpenDistributeLabel' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/OpenDistributeLabel.php',
+        'USPS\\PriorityLabel' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/PriorityLabel.php',
+        'USPS\\PriorityMailServiceStandards' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/PriorityMailServiceStandards.php',
+        'USPS\\Rate' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/Rate.php',
+        'USPS\\RatePackage' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/RatePackage.php',
+        'USPS\\ServiceDeliveryCalculator' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/ServiceDeliveryCalculator.php',
+        'USPS\\TrackConfirm' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/TrackConfirm.php',
+        'USPS\\USPSBase' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/USPSBase.php',
+        'USPS\\XML2Array' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/XML2Array.php',
+        'USPS\\XMLParser' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/XMLParser.php',
+        'USPS\\ZipCodeLookup' => __DIR__ . '/..' . '/vinceg/usps-php-api/src/ZipCodeLookup.php',
         'Unirest\\File' => __DIR__ . '/..' . '/mashape/unirest-php/src/Unirest/File.php',
         'Unirest\\Method' => __DIR__ . '/..' . '/mashape/unirest-php/src/Unirest/Method.php',
         'Unirest\\Request' => __DIR__ . '/..' . '/mashape/unirest-php/src/Unirest/Request.php',

@@ -1,6 +1,7 @@
 import {
     sdk
 } from '../../Networking';
+import {RACHAELS_ACTION} from "../inventory/rachaels";
 
 export const CART_ACTION = {
     GET_ITEMS: {
@@ -12,6 +13,11 @@ export const CART_ACTION = {
         PENDING: 'add_cart_item_pending',
         SUCCESS: 'add_cart_item_success',
         ERROR: 'add_cart_item_error',
+    },
+    SAVE_DESTINATION: {
+        PENDING: 'save_destination_pending',
+        SUCCESS: 'save_destination_success',
+        ERROR: 'save_destination_error',
     }
 };
 
@@ -61,4 +67,27 @@ export function addItem(id) {
                 })
             });
     };
+}
+
+export function saveDestinationToCart(destination) {
+    return dispatch => {
+        dispatch({
+            type: CART_ACTION.SAVE_DESTINATION.PENDING,
+        });
+
+        return sdk.resources.shop.cart.saveDestination(destination)
+            .then(response => {
+                return response.json();
+            })
+            .then(json => dispatch({
+                type: CART_ACTION.SAVE_DESTINATION.SUCCESS,
+                response: json
+            })).catch(error => {
+                dispatch({
+                    type: CART_ACTION.SAVE_DESTINATION.ERROR,
+                    response: error,
+                });
+                throw error;
+            });
+    }
 }

@@ -16,6 +16,7 @@ class CreateCartTable extends Migration
         Schema::create('shop_carts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uuid');
+            $table->integer('id_destination')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

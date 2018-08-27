@@ -11,10 +11,17 @@ export default class Cart extends AbstractResource {
     }
 
     addItem(id) {
-        console.log(id);
         return this.post(`cart/item`, {
             body: JSON.stringify({
                 id_product: id
+            })
+        });
+    }
+
+    saveDestination(destination) {
+        return this.post(`cart/destination`, {
+            body: JSON.stringify({
+                destination: destination
             })
         });
     }

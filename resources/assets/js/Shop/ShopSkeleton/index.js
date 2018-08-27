@@ -24,6 +24,7 @@ export default class ShopSkeleton extends Component {
                             <Route path="/items/:id" component={ItemPage}/>
                             <Route exact path="/cart" component={Cart}/>
                             <Route exact path="/checkout" component={Checkout}/>
+                            <Route exact path="/checkout/:step" component={Checkout}/>
                         </div>
                     </div>
                 </div>
